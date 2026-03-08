@@ -1,17 +1,20 @@
 # 友链
 
-技术、资源与灵感。
+精选安全与云安全资源。
 
-## 🌐 推荐博客
+## 文档与规范
+- MITRE ATT&CK
+- OWASP Top 10
+- NIST SP 800 系列
 
-- **[Example Blog]**: 描述。
-- **[Example Tech Blog]**: 描述。
+## 厂商与平台
+- Check Point 官方文档与支持中心
+- AWS Security Docs / Well-Architected Security
+- Azure Security Docs
 
-## 📚 资源网站
+## 社区与资讯
+- Hacker News / Security
+- Krebs on Security
+- Threatpost
 
-- **[MkDocs Material]**: 静态站点生成器。
-- **[Astro Docs]**: 现代 Web 应用框架。
-
----
-
-*加入本站友链：[Email](mailto:your-email@example.com)*
+— 友链交换请联系：your-email@example.com —

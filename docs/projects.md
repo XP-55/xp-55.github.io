@@ -1,16 +1,20 @@
 # 项目
 
-这里展示了我参与或维护的开源项目。
+记录我在网络安全与云安全领域的实践与工具沉淀。
 
-## 🌟 核心项目
+## 🌟 核心
 
-### **[Deep Skills Wiki](https://github.com/xp-55/xp-55.github.io)**
-基于 Material for MkDocs 构建的技术博客与知识库源码。
+- DeepSkills Wiki（本项目）  
+  基于 Material for MkDocs 的知识库与博客。
 
-- **技术栈**: MkDocs, Python, GitHub Actions
-- **特点**: 极致阅读体验，自动部署。
+## 🔐 安全实战
 
-## 🛠️ 工具与实验
+- Check Point 实验环境与策略最佳实践
+- 入侵检测与告警联动（SOC/Threat Intelligence）
+- 云安全基线与合规检测（AWS/Azure）
 
-- **[Project 1]**: 简短功能描述。
-- **[Project 2]**: 简短功能描述。
+## 🧰 工具与脚本
+
+- 规则审计与变更对比脚本
+- 攻防演练环境自动化部署
+- 日志解析与告警聚合工具

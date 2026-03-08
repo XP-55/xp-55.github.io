@@ -1,9 +1,7 @@
-# Deep Skills Wiki
+# DeepSkills
 
-> 探索技术深度，记录工程实践。
+专注网络安全与云安全的实践记录，聚焦 Check Point、云安全与 AI+安全。
 
-这里记录了我在技术探索中的一些深度思考、实践总结和知识沉淀。
+— 真实项目经验、实验验证与系统化沉淀 —
 
----
-
-[进入博客 →](blog/index.md)
+[进入博客 →](blog/index.md) · [关于我](about.md) · [项目](projects.md)
