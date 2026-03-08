@@ -5,7 +5,7 @@
 ## 🌟 核心项目
 
 ### **[Deep Skills Wiki](https://github.com/xp-55/xp-55.github.io)**
-基于 MkDocs Material 构建的技术博客与知识库源码。
+基于 Material for MkDocs 构建的技术博客与知识库源码。
 
 - **技术栈**: MkDocs, Python, GitHub Actions
 - **特点**: 极致阅读体验，自动部署。

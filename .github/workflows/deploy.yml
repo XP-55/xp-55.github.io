@@ -24,6 +24,8 @@ jobs:
           python-version: 3.x
       - run: pip install mkdocs-material
       - run: mkdocs build
+      - name: Copy CNAME to build directory
+        run: cp docs/CNAME site/CNAME || true
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3
         with:
