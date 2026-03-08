@@ -1,4 +1,4 @@
-# Deep Skills Wiki (xp-55.github.io)
+# Deep Skills Wiki
 
 这是我的个人技术博客网站的源代码仓库。
 
