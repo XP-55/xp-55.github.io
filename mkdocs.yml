@@ -36,6 +36,8 @@ plugins:
       blog_dir: blog
       post_dir: blog/posts
       authors: true
+extra_javascript:
+  - https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5445907201344618
 
 markdown_extensions:
   - admonition
