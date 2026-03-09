@@ -55,5 +55,6 @@ nav:
   - 博客:
     - blog/index.md
   - 项目: projects.md
+  - 工具: tools.md
   - 关于: about.md
   - 友链: links.md
