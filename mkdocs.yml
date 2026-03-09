@@ -25,6 +25,7 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
   features:
+    - navigation.tabs
     - navigation.top
     - search.suggest
     - search.highlight
@@ -50,9 +51,9 @@ markdown_extensions:
       alternate_style: true
 
 nav:
-  - Home: index.md
-  - Blog:
+  - 首页: index.md
+  - 博客:
     - blog/index.md
-  - Projects: projects.md
-  - Links: links.md
-  - About: about.md
+  - 项目: projects.md
+  - 关于: about.md
+  - 友链: links.md
