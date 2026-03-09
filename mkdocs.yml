@@ -39,6 +39,9 @@ plugins:
       authors: true
 extra_javascript:
   - https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5445907201344618
+  - assets/js/enhance.js
+extra_css:
+  - assets/styles/tech.css
 
 markdown_extensions:
   - admonition

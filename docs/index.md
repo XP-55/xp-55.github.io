@@ -1,7 +1,8 @@
-# DeepSkills
+<div class="dsw-hero">
+  <h1>Deep Skills Wiki</h1>
+  <p>Network Security · Check Point · AI Security</p>
+</div>
 
-专注网络安全与云安全的实践记录，聚焦 Check Point、云安全与 AI+安全。
+专注网络与云安全的实战记录，聚焦策略设计、自动化与排障。
 
-— 真实项目经验、实验验证与系统化沉淀 —
-
-[进入博客 →](blog/index.md) · [关于我](about.md) · [项目](projects.md)
+[进入博客 →](blog/index.md) · [关于我](about.md) · [项目](projects.md) · [工具](tools.md)
