@@ -6,6 +6,7 @@ site_description: 个人技术博客，分享技术深度思考与实践。
 theme:
   name: material
   language: zh
+  custom_dir: overrides
   palette:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
@@ -35,8 +36,9 @@ plugins:
   - search
   - blog:
       blog_dir: blog
-      post_dir: blog/posts
+      post_dir: posts
       authors: true
+  - sitemap
 extra_javascript:
   - https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5445907201344618
   - assets/js/enhance.js
@@ -55,9 +57,11 @@ markdown_extensions:
 
 nav:
   - 首页: index.md
+  - 技能路径: skills.md
+  - AI 工具: tools.md
   - 博客:
     - blog/index.md
+  - 资源库: resources.md
   - 项目: projects.md
-  - 工具: tools.md
   - 关于: about.md
   - 友链: links.md
