@@ -59,4 +59,54 @@ document.addEventListener('DOMContentLoaded', () => {
       list.replaceWith(container);
     }
   }
+
+  // Home: render latest posts from sitemap.xml
+  const homeContainer = document.querySelector('#dsw-home-posts');
+  if (homeContainer) {
+    const limit = 6;
+    fetch('/sitemap.xml')
+      .then(r => r.text())
+      .then(xml => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(xml, 'application/xml');
+        const urls = Array.from(doc.querySelectorAll('url'));
+        const posts = urls
+          .map(u => ({
+            loc: u.querySelector('loc')?.textContent || '',
+            lastmod: u.querySelector('lastmod')?.textContent || ''
+          }))
+          .filter(o => /\/posts\//.test(o.loc));
+        posts.sort((a,b) => (b.lastmod||'').localeCompare(a.lastmod||''));
+        return posts.slice(0, limit);
+      })
+      .then(list => Promise.all(list.map(item =>
+        fetch(item.loc).then(r => r.text()).then(html => {
+          const p = new DOMParser().parseFromString(html, 'text/html');
+          const title = p.querySelector('.md-content h1')?.textContent?.trim()
+                        || p.querySelector('title')?.textContent?.trim()
+                        || item.loc.replace(/^.*\/([^/]+)\/?$/, '$1');
+          return { href: item.loc, title };
+        })).catch(() => ({ href: item.loc, title: item.loc }))
+      ))
+      .then(items => {
+        items.forEach(it => {
+          const card = document.createElement('div');
+          card.className = 'dsw-card';
+          const a = document.createElement('a');
+          const h3 = document.createElement('h3');
+          h3.textContent = it.title;
+          a.href = it.href;
+          a.appendChild(h3);
+          card.appendChild(a);
+          homeContainer.appendChild(card);
+        });
+      })
+      .catch(() => {
+        // fallback: simple link to blog index
+        const a = document.createElement('a');
+        a.href = '/posts/';
+        a.textContent = '查看全部文章';
+        homeContainer.appendChild(a);
+      });
+  }
 });
