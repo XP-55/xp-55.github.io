@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>图片工具箱</title>
+  <title>工具箱</title>
   <link rel="stylesheet" href="../styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,8 +20,8 @@
         <a class="active" href="./">工具箱</a>
       </div>
     </nav>
-    <h1>图片工具箱</h1>
-    <p>压缩 · 尺寸调整 · 裁剪 · 图片转 Base64</p>
+    <h1>工具箱</h1>
+    <p>热门工具 · 图片处理</p>
     <div class="privacy-banner" role="note" aria-live="polite">
       <span class="lead">隐私声明</span>
       <span class="text">本工具完全在浏览器本地处理，不会上传你的图片。</span>
@@ -98,14 +98,12 @@
         </div>
       </div>
     </section>
-    <nav class="tabs" role="tablist" aria-label="工具选择">
-      <button class="tab active" data-tab="compress" role="tab" aria-selected="true">图片压缩</button>
-      <button class="tab" data-tab="resize" role="tab" aria-selected="false">尺寸调整</button>
-      <button class="tab" data-tab="crop" role="tab" aria-selected="false">图片裁剪</button>
-      <button class="tab" data-tab="base64" role="tab" aria-selected="false">图片转 Base64</button>
-    </nav>
+    <section class="section">
+      <h3 class="section-title">图片处理</h3>
+    </section>
 
-    <section class="tool-panel active" id="panel-compress" role="tabpanel" aria-labelledby="compress">
+    <section class="tool-card" id="panel-compress">
+      <h4>图片压缩</h4>
       <div class="uploader">
         <input id="compress-input" type="file" accept="image/*" />
       </div>
@@ -157,7 +155,8 @@
       </div>
     </section>
 
-    <section class="tool-panel" id="panel-resize" role="tabpanel" aria-labelledby="resize">
+    <section class="tool-card" id="panel-resize">
+      <h4>尺寸调整</h4>
       <div class="uploader">
         <input id="resize-input" type="file" accept="image/*" />
       </div>
@@ -223,7 +222,8 @@
       </div>
     </section>
 
-    <section class="tool-panel" id="panel-crop" role="tabpanel" aria-labelledby="crop">
+    <section class="tool-card" id="panel-crop">
+      <h4>图片裁剪</h4>
       <div class="uploader">
         <input id="crop-input" type="file" accept="image/*" />
       </div>
@@ -273,7 +273,8 @@
       </div>
     </section>
 
-    <section class="tool-panel" id="panel-base64" role="tabpanel" aria-labelledby="base64">
+    <section class="tool-card" id="panel-base64">
+      <h4>图片转 Base64</h4>
       <div class="uploader">
         <input id="b64-input" type="file" accept="image/*" />
       </div>
