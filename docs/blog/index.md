@@ -1,11 +1,6 @@
-# 博客
+<div class="dsw-hero">
+  <h1>Deep Skills · 博客</h1>
+  <p>Network Security · Check Point · AI Security</p>
+</div>
 
-聚焦网络安全、Check Point、云安全与 AI+安全的实战与思考。
-
-- 实战记录：策略设计、告警联动、攻防演练
-- 云安全：基线、合规与落地方案
-- 工具脚本：自动化与排障实践
-
-开始阅读：
-- 最新文章列表见下方
-- 或从导航进入分类阅读
+最新文章见下方列表，或通过顶部导航快速进入页面。
