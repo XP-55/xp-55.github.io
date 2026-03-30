@@ -38,12 +38,11 @@ plugins:
       blog_dir: posts
       post_dir: .
       authors: true
-  - sitemap
 extra_javascript:
   - https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5445907201344618
-  - assets/js/enhance.js
+  - assets/js/enhance.js?v=20260309-1
 extra_css:
-  - assets/styles/tech.css
+  - assets/styles/tech.css?v=20260309-1
 
 markdown_extensions:
   - admonition
