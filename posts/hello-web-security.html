@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>从攻防视角理解同源策略与常见绕过</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="fx-bg" aria-hidden="true"></div>
+  <header class="site-header">
+    <nav class="topnav">
+      <a class="brand" href="../">网络安全博客</a>
+      <div class="links">
+        <a href="../">首页</a>
+        <a href="../blog/">博客</a>
+        <a href="../tools/">工具箱</a>
+      </div>
+    </nav>
+    <h1>从攻防视角理解同源策略与常见绕过</h1>
+    <p>Web 安全 · 基础原理</p>
+  </header>
+
+  <main class="container">
+    <article class="post">
+      <h2>要点</h2>
+      <ul>
+        <li>同源策略限制了 DOM、Cookie、Storage、网络结果的跨源访问。</li>
+        <li>放行跨域通常通过 CORS、PostMessage、JSONP、反向代理等。</li>
+        <li>常见误用：反射式允许任意 Origin、通配符与凭据混用、传递信任。</li>
+      </ul>
+      <h2>攻防视角</h2>
+      <p>从攻击面看，跨域最易被滥开的是 CORS。若后端将 <code>Access-Control-Allow-Origin</code> 直接回显请求头或使用 <code>*</code> 与 <code>Access-Control-Allow-Credentials: true</code> 同时出现，将导致任意站点可携带用户 Cookie 发起跨域读，进而访问敏感 API。</p>
+      <h3>排查路径</h3>
+      <ol>
+        <li>抓包检查关键响应头，留意 ACAO 与凭据配置。</li>
+        <li>验证预检与简单请求差异，关注非简单 Content-Type。</li>
+        <li>确认前端是否通过 PostMessage 传递敏感数据且缺少来源校验。</li>
+      </ol>
+      <h2>防护建议</h2>
+      <ul>
+        <li>白名单匹配 Origin，精确到协议+域名+端口。</li>
+        <li>携带凭据时禁止使用 <code>*</code>，逐一设置允许源。</li>
+        <li>PostMessage 校验 <code>event.origin</code> 与消息结构。</li>
+      </ul>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <span>本文为入门梳理，更多实践请参见随后的专项文章。</span>
+  </footer>
+</body>
+</html>

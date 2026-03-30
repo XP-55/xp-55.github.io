@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>图片工具箱</title>
+  <title>网络安全技术博客</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,237 +12,49 @@
 <body>
   <div class="fx-bg" aria-hidden="true"></div>
   <header class="site-header">
-    <h1>图片工具箱</h1>
-    <p>压缩 · 尺寸调整 · 裁剪 · 图片转 Base64</p>
-    <div class="privacy-banner" role="note" aria-live="polite">
-      <span class="lead">隐私声明</span>
-      <span class="text">本工具完全在浏览器本地处理，不会上传你的图片。</span>
-    </div>
+    <nav class="topnav">
+      <a class="brand" href="/">网络安全博客</a>
+      <div class="links">
+        <a class="active" href="/">首页</a>
+        <a href="blog/">博客</a>
+        <a href="tools/">工具箱</a>
+      </div>
+    </nav>
+    <h1>探索攻防与工程实践</h1>
+    <p>漏洞分析 · 渗透测试 · 安全开发 · 实用工具</p>
   </header>
 
   <main class="container">
-    <div class="ad-slot">广告位</div>
-    <nav class="tabs" role="tablist" aria-label="工具选择">
-      <button class="tab active" data-tab="compress" role="tab" aria-selected="true">图片压缩</button>
-      <button class="tab" data-tab="resize" role="tab" aria-selected="false">尺寸调整</button>
-      <button class="tab" data-tab="crop" role="tab" aria-selected="false">图片裁剪</button>
-      <button class="tab" data-tab="base64" role="tab" aria-selected="false">图片转 Base64</button>
-    </nav>
-
-    <section class="tool-panel active" id="panel-compress" role="tabpanel" aria-labelledby="compress">
-      <div class="uploader">
-        <input id="compress-input" type="file" accept="image/*" />
-      </div>
-      <div class="controls">
-        <div class="control">
-          <label for="compress-quality">质量</label>
-          <input id="compress-quality" type="range" min="0.1" max="1" step="0.05" value="0.8" />
-          <span id="compress-quality-display">0.80</span>
-        </div>
-        <div class="control">
-          <label for="compress-format">输出格式</label>
-          <select id="compress-format">
-            <option value="auto" selected>自动</option>
-            <option value="image/jpeg">JPEG</option>
-            <option value="image/webp">WebP</option>
-            <option value="image/png">PNG</option>
-          </select>
-        </div>
-        <button id="compress-btn" class="primary">开始压缩</button>
-      </div>
-      <div class="notice info">
-        <strong>温馨提醒</strong>
-        <ul>
-          <li>质量越低体积越小，建议区间 0.60–0.85。</li>
-          <li>JPEG 不支持透明；带透明的图片优先选择 WebP 或 PNG。</li>
-          <li>压缩不改变像素尺寸，如需改尺寸请使用“尺寸调整”。</li>
-        </ul>
-      </div>
-      <div class="preview-grid">
-        <div class="card">
-          <h3>原图</h3>
-          <img id="compress-src" alt="原图预览" />
-          <div class="meta">
-            <span id="compress-src-size">-</span>
-            <span id="compress-src-dim">-</span>
-          </div>
-        </div>
-        <div class="card">
-          <h3>压缩结果</h3>
-          <img id="compress-out" alt="压缩图预览" />
-          <div class="meta">
-            <span id="compress-out-size">-</span>
-            <span id="compress-out-dim">-</span>
-          </div>
-          <div class="actions">
-            <button id="compress-download" disabled>下载图片</button>
-          </div>
+    <section class="hero">
+      <div class="hero-text">
+        <h2>深挖原理，落地实战</h2>
+        <p>记录网络安全研究与工程方法论，输出高质量中文内容。</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="blog/">阅读博客</a>
+          <a class="btn" href="tools/">进入工具箱</a>
         </div>
       </div>
     </section>
 
-    <section class="tool-panel" id="panel-resize" role="tabpanel" aria-labelledby="resize">
-      <div class="uploader">
-        <input id="resize-input" type="file" accept="image/*" />
+    <section class="section">
+      <h3 class="section-title">最新文章</h3>
+      <div class="card-list">
+        <a class="post-card" href="posts/hello-web-security.html">
+          <h4>从攻防视角理解同源策略与常见绕过</h4>
+          <p>梳理 SOP 基础、CORS、PostMessage 与常见误用，配合实践思路。</p>
+          <span class="meta">Web 安全 · 基础原理</span>
+        </a>
       </div>
-      <div class="controls">
-        <div class="control-inline">
-          <label for="resize-width">宽(px)</label>
-          <input id="resize-width" type="number" min="1" placeholder="宽" />
-          <label for="resize-height">高(px)</label>
-          <input id="resize-height" type="number" min="1" placeholder="高" />
-          <label class="checkbox">
-            <input id="resize-lock" type="checkbox" checked />
-            等比
-          </label>
-        </div>
-        <div class="presets">
-          <span>证件照：</span>
-          <button class="chip" data-w="295" data-h="413">一寸 295×413</button>
-          <button class="chip" data-w="413" data-h="531">二寸 413×531</button>
-          <span class="spacer"></span>
-          <span>头像：</span>
-          <button class="chip" data-w="256" data-h="256">256×256</button>
-          <button class="chip" data-w="512" data-h="512">512×512</button>
-        </div>
-        <div class="control">
-          <label for="resize-format">输出格式</label>
-          <select id="resize-format">
-            <option value="auto" selected>自动</option>
-            <option value="image/jpeg">JPEG</option>
-            <option value="image/webp">WebP</option>
-            <option value="image/png">PNG</option>
-          </select>
-        </div>
-        <button id="resize-btn" class="primary">开始调整</button>
-      </div>
-      <div class="notice info">
-        <strong>温馨提醒</strong>
-        <ul>
-          <li>勾选“等比”可避免拉伸变形。</li>
-          <li>常用证件照像素为基于 300DPI 的习惯值，一寸 295×413、二寸 413×531。</li>
-          <li>用于打印可优先导出 PNG 或高质量 JPEG。</li>
-        </ul>
-      </div>
-      <div class="preview-grid">
-        <div class="card">
-          <h3>原图</h3>
-          <img id="resize-src" alt="原图预览" />
-          <div class="meta">
-            <span id="resize-src-size">-</span>
-            <span id="resize-src-dim">-</span>
-          </div>
-        </div>
-        <div class="card">
-          <h3>调整结果</h3>
-          <img id="resize-out" alt="调整图预览" />
-          <div class="meta">
-            <span id="resize-out-size">-</span>
-            <span id="resize-out-dim">-</span>
-          </div>
-          <div class="actions">
-            <button id="resize-download" disabled>下载图片</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="tool-panel" id="panel-crop" role="tabpanel" aria-labelledby="crop">
-      <div class="uploader">
-        <input id="crop-input" type="file" accept="image/*" />
-      </div>
-      <div class="controls">
-        <div class="control-inline">
-          <label for="crop-aspect">裁剪比例</label>
-          <select id="crop-aspect">
-            <option value="free" selected>自由</option>
-            <option value="1:1">1:1</option>
-            <option value="4:3">4:3</option>
-            <option value="3:4">3:4</option>
-            <option value="16:9">16:9</option>
-          </select>
-          <label for="crop-format">输出格式</label>
-          <select id="crop-format">
-            <option value="auto" selected>自动</option>
-            <option value="image/jpeg">JPEG</option>
-            <option value="image/webp">WebP</option>
-            <option value="image/png">PNG</option>
-          </select>
-        </div>
-        <button id="crop-btn" class="primary">导出裁剪</button>
-      </div>
-      <div class="notice info">
-        <strong>温馨提醒</strong>
-        <ul>
-          <li>在画布上拖拽绘制裁剪框，比例可固定为 1:1、4:3 等。</li>
-          <li>导出分辨率等于选区像素；需精确尺寸时可先裁剪后“尺寸调整”。</li>
-          <li>大图裁剪卡顿时，可先压缩或缩小后再裁剪。</li>
-        </ul>
-      </div>
-      <div class="cropper">
-        <div class="crop-stage">
-          <canvas id="crop-canvas"></canvas>
-          <div id="crop-overlay"></div>
-          <div id="crop-rect" hidden></div>
-        </div>
-        <div class="meta-row">
-          <span id="crop-src-size">-</span>
-          <span id="crop-src-dim">-</span>
-          <span id="crop-rect-dim">-</span>
-        </div>
-        <div class="actions">
-          <button id="crop-download" disabled>下载图片</button>
-        </div>
-        <img id="crop-out" alt="裁剪结果预览" />
-      </div>
-    </section>
-
-    <section class="tool-panel" id="panel-base64" role="tabpanel" aria-labelledby="base64">
-      <div class="uploader">
-        <input id="b64-input" type="file" accept="image/*" />
-      </div>
-      <div class="controls">
-        <button id="b64-btn" class="primary">生成 Base64</button>
-        <div class="control-inline">
-          <label class="checkbox">
-            <input id="b64-strip" type="checkbox" />
-            去掉 data: 前缀
-          </label>
-        </div>
-      </div>
-      <div class="notice info">
-        <strong>温馨提醒</strong>
-        <ul>
-          <li>Base64 体积约比原文件增大 ~33%，不适合非常大的图片。</li>
-          <li>去掉前缀便于存入数据库或在 CSS/JSON 中使用。</li>
-          <li>文本很长时建议“下载为 .txt”再使用。</li>
-        </ul>
-      </div>
-      <div class="preview-grid single">
-        <div class="card">
-          <h3>原图</h3>
-          <img id="b64-src" alt="原图预览" />
-          <div class="meta">
-            <span id="b64-src-size">-</span>
-            <span id="b64-src-dim">-</span>
-          </div>
-        </div>
-        <div class="card">
-          <h3>Base64</h3>
-          <textarea id="b64-text" rows="8" placeholder="生成后在此显示"></textarea>
-          <div class="actions">
-            <button id="b64-copy" disabled>复制</button>
-            <button id="b64-download" disabled>下载为 .txt</button>
-          </div>
-        </div>
+      <div class="more-actions">
+        <a class="btn" href="blog/">浏览全部文章</a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <span>本工具完全在浏览器本地处理，不会上传你的图片。建议在现代浏览器中使用，超大分辨率图片可能受内存限制影响。</span>
+    <span>分享网络安全技术与工程经验。工具合集见“工具箱”。</span>
   </footer>
 
-  <script src="app.js" type="module"></script>
+  
 </body>
 </html>
