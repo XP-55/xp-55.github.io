@@ -35,8 +35,8 @@ theme:
 plugins:
   - search
   - blog:
-      blog_dir: blog
-      post_dir: posts
+      blog_dir: posts
+      post_dir: .
       authors: true
   - sitemap
 extra_javascript:
@@ -60,7 +60,7 @@ nav:
   - 技能路径: skills.md
   - AI 工具: tools.md
   - 博客:
-    - blog/index.md
+    - posts/index.md
   - 资源库: resources.md
   - 项目: projects.md
   - 关于: about.md
