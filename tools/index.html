@@ -30,6 +30,74 @@
 
   <main class="container">
     <div class="ad-slot">广告位</div>
+    <section class="section">
+      <h3 class="section-title">🔥 热门工具</h3>
+      <div class="card-grid">
+        <div class="tool-card">
+          <h4>IP地址查询</h4>
+          <div class="tool-controls">
+            <div class="control-inline">
+              <input id="ip-input" type="text" placeholder="可选：输入域名或IP" />
+              <button id="ip-lookup" class="primary">查询</button>
+              <button id="ip-my">获取我的IP</button>
+            </div>
+          </div>
+          <pre class="codeblock" id="ip-result">等待查询…</pre>
+        </div>
+        <div class="tool-card">
+          <h4>JWT解析</h4>
+          <div class="tool-controls">
+            <textarea id="jwt-input" rows="5" placeholder="粘贴你的 JWT（仅本地解析，不校验签名）"></textarea>
+          </div>
+          <div class="tool-split">
+            <div>
+              <div class="mini-title">Header</div>
+              <pre class="codeblock" id="jwt-header">-</pre>
+            </div>
+            <div>
+              <div class="mini-title">Payload</div>
+              <pre class="codeblock" id="jwt-payload">-</pre>
+            </div>
+          </div>
+          <div class="error" id="jwt-error"></div>
+        </div>
+        <div class="tool-card">
+          <h4>时间戳转换</h4>
+          <div class="tool-controls">
+            <div class="control-inline">
+              <input id="ts-input" type="text" placeholder="输入时间戳（秒或毫秒）" />
+              <button id="ts-now-sec">当前秒</button>
+              <button id="ts-now-ms">当前毫秒</button>
+            </div>
+          </div>
+          <div class="tool-grid">
+            <div class="mini-title">本地时间</div>
+            <div id="ts-local">-</div>
+            <div class="mini-title">UTC 时间</div>
+            <div id="ts-utc">-</div>
+            <div class="mini-title">标准秒</div>
+            <div id="ts-seconds">-</div>
+            <div class="mini-title">标准毫秒</div>
+            <div id="ts-millis">-</div>
+          </div>
+        </div>
+        <div class="tool-card">
+          <h4>Base64编码</h4>
+          <div class="tool-controls">
+            <textarea id="b64t-input" rows="5" placeholder="待处理文本"></textarea>
+            <div class="control-inline">
+              <label class="checkbox">
+                <input id="b64t-urlsafe" type="checkbox" />
+                URL 安全变体
+              </label>
+              <button id="b64t-encode" class="primary">编码 →</button>
+              <button id="b64t-decode">← 解码</button>
+            </div>
+            <textarea id="b64t-output" rows="5" placeholder="结果输出"></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
     <nav class="tabs" role="tablist" aria-label="工具选择">
       <button class="tab active" data-tab="compress" role="tab" aria-selected="true">图片压缩</button>
       <button class="tab" data-tab="resize" role="tab" aria-selected="false">尺寸调整</button>
@@ -252,6 +320,6 @@
   </footer>
 
   <script src="../app.js" type="module"></script>
+  <script src="tools.js" type="module"></script>
 </body>
 </html>
-
