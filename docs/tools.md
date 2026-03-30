@@ -10,6 +10,8 @@
 - convert_docx.py  
   将 .docx 转为 Markdown（完整模式），尝试保留图片，失败时可回退安全模式。
 
+> 提示：也可以直接在对话中说“把某某.docx 发布为博文”，系统会按 docx2md 流程自动完成。
+
 ## 广告嵌入
 
 - includes/adsense-inline.html  

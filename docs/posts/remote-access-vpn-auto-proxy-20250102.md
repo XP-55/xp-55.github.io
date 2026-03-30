@@ -4,6 +4,14 @@ categories:
   - Check Point
   - Network Security
 title: Remote Access VPN 自动加载代理脚本
+keywords:
+  - Remote Access
+  - VPN
+  - Check Point
+  - WPAD
+tags:
+  - Check Point
+  - VPN
 ---
 
 ## 背景与目标

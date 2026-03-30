@@ -7,9 +7,12 @@
 - 流量治理与访问控制、日志与告警
 
 ## Check Point 精进
-- SmartConsole/Policy 设计与变更治理
-- Infinity Portal 与 API 调用
-- Threat Emulation/EX/AV、Harmony 套件
+- Policy 设计与变更治理（对象、层、规则基线）
+- Infinity Portal 与 API（令牌、调用、自动化）
+- Threat 家族与客户端套件实践
+- 实战示例：
+  - [Remote Access VPN 自动加载代理脚本](posts/remote-access-vpn-auto-proxy-20250102.md)
+  - [AIOps 智能运维实践](posts/aiops-20260308.md)
 
 ## 云安全路线
 - AWS/Azure 安全基线与合规
@@ -20,4 +23,3 @@
 - 检测与响应工作流的智能化
 
 — 配合博客与工具页，逐步沉淀可复用的方法与脚本 —
-
