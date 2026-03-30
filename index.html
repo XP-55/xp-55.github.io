@@ -44,6 +44,14 @@
         </div>
         <button id="compress-btn" class="primary">开始压缩</button>
       </div>
+      <div class="notice info">
+        <strong>温馨提醒</strong>
+        <ul>
+          <li>质量越低体积越小，建议区间 0.60–0.85。</li>
+          <li>JPEG 不支持透明；带透明的图片优先选择 WebP 或 PNG。</li>
+          <li>压缩不改变像素尺寸，如需改尺寸请使用“尺寸调整”。</li>
+        </ul>
+      </div>
       <div class="preview-grid">
         <div class="card">
           <h3>原图</h3>
@@ -102,6 +110,14 @@
         </div>
         <button id="resize-btn" class="primary">开始调整</button>
       </div>
+      <div class="notice info">
+        <strong>温馨提醒</strong>
+        <ul>
+          <li>勾选“等比”可避免拉伸变形。</li>
+          <li>常用证件照像素为基于 300DPI 的习惯值，一寸 295×413、二寸 413×531。</li>
+          <li>用于打印可优先导出 PNG 或高质量 JPEG。</li>
+        </ul>
+      </div>
       <div class="preview-grid">
         <div class="card">
           <h3>原图</h3>
@@ -149,6 +165,14 @@
         </div>
         <button id="crop-btn" class="primary">导出裁剪</button>
       </div>
+      <div class="notice info">
+        <strong>温馨提醒</strong>
+        <ul>
+          <li>在画布上拖拽绘制裁剪框，比例可固定为 1:1、4:3 等。</li>
+          <li>导出分辨率等于选区像素；需精确尺寸时可先裁剪后“尺寸调整”。</li>
+          <li>大图裁剪卡顿时，可先压缩或缩小后再裁剪。</li>
+        </ul>
+      </div>
       <div class="cropper">
         <div class="crop-stage">
           <canvas id="crop-canvas"></canvas>
@@ -180,6 +204,14 @@
           </label>
         </div>
       </div>
+      <div class="notice info">
+        <strong>温馨提醒</strong>
+        <ul>
+          <li>Base64 体积约比原文件增大 ~33%，不适合非常大的图片。</li>
+          <li>去掉前缀便于存入数据库或在 CSS/JSON 中使用。</li>
+          <li>文本很长时建议“下载为 .txt”再使用。</li>
+        </ul>
+      </div>
       <div class="preview-grid single">
         <div class="card">
           <h3>原图</h3>
@@ -202,10 +234,9 @@
   </main>
 
   <footer class="site-footer">
-    <span>本工具完全在浏览器本地处理，不会上传你的图片。</span>
+    <span>本工具完全在浏览器本地处理，不会上传你的图片。建议在现代浏览器中使用，超大分辨率图片可能受内存限制影响。</span>
   </footer>
 
   <script src="app.js" type="module"></script>
 </body>
 </html>
-

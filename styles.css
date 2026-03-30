@@ -37,4 +37,7 @@
 .meta-row{display:flex;gap:12px;color:#94a3b8;font-size:12px;margin-top:8px}
 .site-footer{padding:20px 16px;text-align:center;color:#64748b;font-size:12px}
 @media (max-width:900px){.preview-grid{grid-template-columns:1fr}}
-
+.notice{margin-top:12px;background:#0e1730;border:1px solid #1f2a44;border-left:3px solid #3b82f6;border-radius:12px;padding:10px 12px;color:#cbd5e1;font-size:13px;line-height:1.5}
+.notice strong{color:#e2e8f0;margin-right:6px}
+.notice ul{margin:6px 0 0 18px;padding:0}
+.notice li{margin:4px 0}
