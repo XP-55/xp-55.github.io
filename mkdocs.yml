@@ -57,11 +57,9 @@ markdown_extensions:
 
 nav:
   - 首页: index.md
-  - 技能路径: skills.md
   - AI 工具: tools.md
-  - 博客:
-    - posts/index.md
+  - 内容:
+    - 博客: posts/index.md
+    - 项目: projects.md
   - 资源库: resources.md
-  - 项目: projects.md
-  - 关于: about.md
   - 友链: links.md
