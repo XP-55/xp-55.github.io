@@ -69,6 +69,13 @@ opacity:.35;mask-image:radial-gradient(1200px 900px at 50% 40%,#000 30%,transpar
 .post th{background:rgba(30,41,59,.6);color:#f8fafc}
 .post mark{background:rgba(250,204,21,.18);color:#fde68a;padding:0 4px;border-radius:6px}
 .post img{display:block;margin:10px auto}
+.img-redact{position:relative;display:block;width:fit-content;margin:10px auto}
+.img-redact img{margin:0!important}
+.img-redact::before,.img-redact::after{content:"";position:absolute;pointer-events:none;border-radius:8px;opacity:.95;background:
+repeating-linear-gradient(0deg,rgba(15,23,42,.92) 0 10px,rgba(30,41,59,.92) 10px 20px),
+repeating-linear-gradient(90deg,rgba(15,23,42,.92) 0 10px,rgba(30,41,59,.92) 10px 20px);box-shadow:0 0 0 1px rgba(148,163,184,.25) inset,0 8px 20px rgba(0,0,0,.25)}
+.img-redact::before{top:10px;right:10px;width:min(320px,38%);height:min(56px,12%)}
+.img-redact::after{bottom:10px;right:10px;width:min(360px,42%);height:min(56px,12%)}
 .uploader input[type=file]{width:100%;padding:14px;border:1px dashed #334155;border-radius:12px;background:#0e1730;color:#94a3b8}
 .controls{display:flex;flex-direction:column;gap:12px;margin-top:14px}
 .control{display:flex;align-items:center;gap:12px}

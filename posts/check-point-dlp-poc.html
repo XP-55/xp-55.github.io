@@ -64,6 +64,13 @@
         img.removeAttribute("style");
         img.style.maxWidth = "100%";
         img.style.borderRadius = "10px";
+        const wrapper = doc.createElement("span");
+        wrapper.className = "img-redact";
+        const parent = img.parentNode;
+        if (parent) {
+          parent.insertBefore(wrapper, img);
+          wrapper.appendChild(img);
+        }
       });
 
       const demote = (tag, next)=>{
