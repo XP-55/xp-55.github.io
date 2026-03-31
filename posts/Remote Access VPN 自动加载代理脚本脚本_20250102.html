@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Remote Access VPN 自动加载代理脚本脚本_20250102 | 网络安全技术博客</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="fx-bg" aria-hidden="true"></div>
+  <header class="site-header">
+    <nav class="topnav">
+      <a class="brand" href="../">网络安全博客</a>
+      <div class="links">
+        <a href="../">首页</a>
+        <a class="active" href="../blog/">博客</a>
+        <a href="../tools/">工具箱</a>
+        <a href="../about/">关于</a>
+      </div>
+    </nav>
+    <h1>Remote Access VPN 自动加载代理脚本脚本_20250102</h1>
+    <p>文档导入 · 包含图片</p>
+  </header>
+
+  <main class="container">
+    <article class="post">
+      <div id="post-body">正在加载内容…</div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <span>欢迎交流与反馈。</span>
+  </footer>
+  <script type="module">
+    const url = "./Remote Access VPN 自动加载代理脚本脚本_20250102-content.html";
+    fetch(url).then(r=>r.text()).then(html=>{
+      const doc = new DOMParser().parseFromString(html,"text/html");
+      const body = doc.body ? doc.body.innerHTML : html;
+      document.querySelector("#post-body").innerHTML = body;
+    }).catch(()=>{ document.querySelector("#post-body").textContent = "加载失败"; });
+  </script>
+</body>
+</html>
