@@ -29,6 +29,68 @@
   <main class="container">
     <article class="post">
       <div id="post-body">正在加载内容…</div>
+      <template id="source">
+        <p>测试人员:XinPeng Jiang</p>
+        <p>测试时间:2025/3/17</p>
+        <h1 id="测试说明">测试说明</h1>
+        <p>测试版本: SMS R82 hotfix take12(该原始版本R81.20 upgrade之后版本) ;
+        GW: R81.20</p>
+        <h1 id="配置步骤">配置步骤</h1>
+        <ol type="1">
+        <li><p>注册infinity portal 账号</p></li>
+        <li><p>通过smartconsole登录SMS 获取token</p></li>
+        </ol>
+        <p><img
+        src="check-point-infinity-aiops-assets/media/image1.png"
+        style="width:6.5in;height:3.68333in"
+        alt="图形用户界面, 应用程序, Teams AI 生成的内容可能不正确。" /></p>
+        <p><img
+        src="check-point-infinity-aiops-assets/media/image2.png"
+        style="width:6.5in;height:2.9625in"
+        alt="图形用户界面, 文本, 应用程序, 电子邮件 AI 生成的内容可能不正确。" /></p>
+        <p>登录infinity portal 获取token，复制token 到如下界面</p>
+        <p><img
+        src="check-point-infinity-aiops-assets/media/image3.png"
+        style="width:6.5in;height:4.69514in" /></p>
+        <p><img
+        src="check-point-infinity-aiops-assets/media/image4.png"
+        style="width:4.97917in;height:7.08333in"
+        alt="图形用户界面, 文本, 应用程序, 电子邮件 AI 生成的内容可能不正确。" /></p>
+        <p><img
+        src="check-point-infinity-aiops-assets/media/image5.png"
+        style="width:6.5in;height:3.85972in"
+        alt="图形用户界面, 应用程序 AI 生成的内容可能不正确。" /></p>
+        <p><img
+        src="check-point-infinity-aiops-assets/media/image6.png"
+        style="width:6.5in;height:3.87014in"
+        alt="图形用户界面, 应用程序 AI 生成的内容可能不正确。" /></p>
+        <p><img
+        src="check-point-infinity-aiops-assets/media/image7.png"
+        style="width:6.5in;height:3.85972in"
+        alt="图形用户界面, 应用程序 AI 生成的内容可能不正确。" /></p>
+        <p>导入AIops 脚本，修改脚本权限并执行。</p>
+        <p><img
+        src="check-point-infinity-aiops-assets/media/image8.png"
+        style="width:6.5in;height:2.54167in" /></p>
+        <p>如需重新添加GW可执行如下命令</p>
+        <p><img
+        src="check-point-infinity-aiops-assets/media/image9.png"
+        style="width:6.36144in;height:7.47955in"
+        alt="A screenshot of a computer AI-generated content may be incorrect." /></p>
+        <p><img
+        src="check-point-infinity-aiops-assets/media/image10.png"
+        style="width:6.5in;height:1.51597in"
+        alt="A black screen with blue and white lines AI-generated content may be incorrect." /></p>
+        <p><img
+        src="check-point-infinity-aiops-assets/media/image11.png"
+        style="width:6.37533in;height:7.549in"
+        alt="A screenshot of a computer AI-generated content may be incorrect." /></p>
+        <p>GW添加成功</p>
+        <p><img
+        src="check-point-infinity-aiops-assets/media/image12.png"
+        style="width:6.5in;height:2.05764in"
+        alt="A screenshot of a computer AI-generated content may be incorrect." /></p>
+      </template>
     </article>
   </main>
 
@@ -37,50 +99,47 @@
   </footer>
 
   <script type="module">
-    const url = "./check-point-infinity-aiops-content.html";
-    fetch(url).then(r=>r.text()).then(html=>{
-      const container = document.querySelector("#post-body");
-      const doc = new DOMParser().parseFromString(html, "text/html");
-      const root = doc.body || doc;
+    const container = document.querySelector("#post-body");
+    const fragment = document.querySelector("#source").content.cloneNode(true);
+    const root = fragment;
 
-      Array.from(root.querySelectorAll("p")).forEach(p=>{
-        const t = (p.textContent || "").trim();
-        if (/测试人员[:：]/.test(t) || /^测试时间[:：]/.test(t)) p.remove();
-        if (/文档作者[:：]/.test(t) || /^时间[:：]/.test(t)) p.remove();
-        if (/报告日期[:：]/.test(t)) p.remove();
+    Array.from(root.querySelectorAll("p")).forEach(p=>{
+      const t = (p.textContent || "").trim();
+      if (/测试人员[:：]/.test(t) || /^测试时间[:：]/.test(t)) p.remove();
+      if (/文档作者[:：]/.test(t) || /^时间[:：]/.test(t)) p.remove();
+      if (/报告日期[:：]/.test(t)) p.remove();
+    });
+
+    Array.from(root.querySelectorAll("h1")).forEach(h=>{
+      const id = h.getAttribute("id") || "";
+      const cls = h.getAttribute("class") || "";
+      if (id === "目录" || cls.includes("TOC-Heading")) h.remove();
+    });
+    Array.from(root.querySelectorAll("p")).forEach(p=>{
+      const a = p.querySelector("a");
+      if (!a) return;
+      if (p.childNodes.length === 1 && a.getAttribute("href")?.startsWith("#")) p.remove();
+    });
+
+    Array.from(root.querySelectorAll("img")).forEach(img=>{
+      img.removeAttribute("style");
+      img.style.maxWidth = "100%";
+      img.style.borderRadius = "10px";
+    });
+
+    const demote = (tag, next)=>{
+      Array.from(root.querySelectorAll(tag)).forEach(h=>{
+        const nh = document.createElement(next);
+        Array.from(h.attributes).forEach(a=>nh.setAttribute(a.name,a.value));
+        nh.innerHTML = h.innerHTML;
+        h.replaceWith(nh);
       });
+    };
+    demote("h3","h4");
+    demote("h2","h3");
+    demote("h1","h2");
 
-      Array.from(root.querySelectorAll("h1")).forEach(h=>{
-        const id = h.getAttribute("id") || "";
-        const cls = h.getAttribute("class") || "";
-        if (id === "目录" || cls.includes("TOC-Heading")) h.remove();
-      });
-      Array.from(root.querySelectorAll("p")).forEach(p=>{
-        const a = p.querySelector("a");
-        if (!a) return;
-        if (p.childNodes.length === 1 && a.getAttribute("href")?.startsWith("#")) p.remove();
-      });
-
-      Array.from(root.querySelectorAll("img")).forEach(img=>{
-        img.removeAttribute("style");
-        img.style.maxWidth = "100%";
-        img.style.borderRadius = "10px";
-      });
-
-      const demote = (tag, next)=>{
-        Array.from(root.querySelectorAll(tag)).forEach(h=>{
-          const nh = doc.createElement(next);
-          Array.from(h.attributes).forEach(a=>nh.setAttribute(a.name,a.value));
-          nh.innerHTML = h.innerHTML;
-          h.replaceWith(nh);
-        });
-      };
-      demote("h3","h4");
-      demote("h2","h3");
-      demote("h1","h2");
-
-      container.innerHTML = root.innerHTML || html;
-    }).catch(()=>{ document.querySelector("#post-body").textContent = "加载失败"; });
+    container.replaceChildren(fragment);
   </script>
 </body>
 </html>
