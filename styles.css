@@ -56,7 +56,15 @@ opacity:.35;mask-image:radial-gradient(1200px 900px at 50% 40%,#000 30%,transpar
 .ad-slot{margin:14px 0;padding:10px;border-radius:12px;border:1px dashed #334155;background:rgba(14,23,48,.6);color:#94a3b8;text-align:center;min-height:90px;display:flex;align-items:center;justify-content:center;letter-spacing:.1em}
 .tool-panel{display:none;padding:16px 0}
 .tool-panel.active{display:block}
-.post{padding:16px;border:1px solid #1f2a44;border-radius:14px;background:rgba(14,23,48,.6);color:#cbd5e1}
+.post{padding:16px;border:1px solid #1f2a44;border-radius:14px;background:rgba(14,23,48,.66);color:#e5e7eb;font-size:16px;line-height:1.8}
+.post p,.post li{color:#e5e7eb}
+.post h2,.post h3,.post h4{color:#f8fafc}
+.post a{color:#93c5fd}
+.post a:visited{color:#c4b5fd}
+.post hr{border:0;border-top:1px solid rgba(148,163,184,.35);margin:16px 0}
+.post code{background:rgba(2,6,23,.6);border:1px solid rgba(51,65,85,.7);padding:2px 6px;border-radius:8px;color:#e2e8f0}
+.post pre{background:rgba(2,6,23,.6);border:1px solid rgba(51,65,85,.7);padding:10px 12px;border-radius:12px;overflow:auto}
+.post img{display:block;margin:10px auto}
 .uploader input[type=file]{width:100%;padding:14px;border:1px dashed #334155;border-radius:12px;background:#0e1730;color:#94a3b8}
 .controls{display:flex;flex-direction:column;gap:12px;margin-top:14px}
 .control{display:flex;align-items:center;gap:12px}

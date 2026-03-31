@@ -47,11 +47,34 @@
         const t = (p.textContent || "").trim();
         if (t.startsWith("文档作者：") || /^时间[:：]/.test(t)) p.remove();
       });
+      Array.from(root.querySelectorAll("h1")).forEach(h=>{
+        const id = h.getAttribute("id") || "";
+        const cls = h.getAttribute("class") || "";
+        if (id === "目录" || cls.includes("TOC-Heading")) h.remove();
+      });
+      Array.from(root.querySelectorAll("p")).forEach(p=>{
+        const a = p.querySelector("a");
+        if (!a) return;
+        if (p.childNodes.length === 1 && a.getAttribute("href")?.startsWith("#")) p.remove();
+      });
 
       Array.from(root.querySelectorAll("img")).forEach(img=>{
+        img.removeAttribute("style");
         img.style.maxWidth = "100%";
         img.style.borderRadius = "10px";
       });
+
+      const demote = (tag, next)=>{
+        Array.from(root.querySelectorAll(tag)).forEach(h=>{
+          const nh = doc.createElement(next);
+          Array.from(h.attributes).forEach(a=>nh.setAttribute(a.name,a.value));
+          nh.innerHTML = h.innerHTML;
+          h.replaceWith(nh);
+        });
+      };
+      demote("h3","h4");
+      demote("h2","h3");
+      demote("h1","h2");
 
       container.innerHTML = root.innerHTML || html;
     }).catch(()=>{ document.querySelector("#post-body").textContent = "加载失败"; });
