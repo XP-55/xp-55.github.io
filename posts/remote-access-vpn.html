@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Remote Access VPN 自动加载代理脚本脚本_20250102 | 网络安全技术博客</title>
+  <title>Remote Access VPN 自动加载代理脚本 | 网络安全技术博客</title>
   <link rel="stylesheet" href="../styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,7 +21,7 @@
         <a href="../about/">关于</a>
       </div>
     </nav>
-    <h1>Remote Access VPN 自动加载代理脚本脚本_20250102</h1>
+    <h1>Remote Access VPN 自动加载代理脚本</h1>
     <p>文档导入 · 包含图片</p>
   </header>
 
@@ -45,7 +45,7 @@
         const t = (p.textContent||"").trim();
         if(t.startsWith("文档作者：") || /^时间[:：]/.test(t)) p.remove();
       });
-      // 处理图片路径（如为 file:// 或绝对路径，尝试映射到本地 assets 目录）
+      // 保持 pandoc 生成的相对路径；仅修正 file:// 路径
       Array.from(body.querySelectorAll("img")).forEach(img=>{
         const src = img.getAttribute("src")||"";
         if(src.startsWith("file://")){
