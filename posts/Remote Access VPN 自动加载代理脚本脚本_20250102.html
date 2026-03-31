@@ -48,8 +48,8 @@
       // 处理图片路径（如为 file:// 或绝对路径，尝试映射到本地 assets 目录）
       Array.from(body.querySelectorAll("img")).forEach(img=>{
         const src = img.getAttribute("src")||"";
-        const filename = src.split("/").pop();
-        if(src.startsWith("file://") || /^https?:\/\//.test(src)===false){
+        if(src.startsWith("file://")){
+          const filename = src.split("/").pop();
           img.setAttribute("src", `./Remote Access VPN 自动加载代理脚本脚本_20250102-assets/${filename}`);
         }
         img.style.maxWidth = "100%";
