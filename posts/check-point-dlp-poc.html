@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Check Point DLP POC | 网络安全技术博客</title>
+  <meta name="description" content="Check Point DLP 数据泄露防护能力 POC：覆盖敏感信息识别、渠道管控、策略验证、审计记录与阻断告警，包含配置与测试截图。" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="fx-bg" aria-hidden="true"></div>
+  <header class="site-header">
+    <nav class="topnav">
+      <a class="brand" href="../">网络安全博客</a>
+      <div class="links">
+        <a href="../">首页</a>
+        <a class="active" href="../blog/">博客</a>
+        <a href="../tools/">工具箱</a>
+        <a href="../about/">关于</a>
+      </div>
+    </nav>
+    <h1>Check Point DLP POC</h1>
+    <p>DLP · 工程验证 · 攻防实践</p>
+  </header>
+
+  <main class="container">
+    <article class="post">
+      <div id="post-body">正在加载内容…</div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <span>欢迎交流与反馈。</span>
+  </footer>
+
+  <script type="module">
+    const url = "./check-point-dlp-poc-content.html";
+    fetch(url).then(r=>r.text()).then(html=>{
+      const container = document.querySelector("#post-body");
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      const root = doc.body || doc;
+
+      Array.from(root.querySelectorAll("p")).forEach(p=>{
+        const t = (p.textContent || "").trim();
+        if (/文档作者[:：]/.test(t) || /^时间[:：]/.test(t)) p.remove();
+        if (/报告日期[:：]/.test(t) || /测试人员[:：]/.test(t)) p.remove();
+      });
+
+      Array.from(root.querySelectorAll("h1")).forEach(h=>{
+        const id = h.getAttribute("id") || "";
+        const cls = h.getAttribute("class") || "";
+        if (id === "目录" || cls.includes("TOC-Heading")) h.remove();
+      });
+      Array.from(root.querySelectorAll("p")).forEach(p=>{
+        const a = p.querySelector("a");
+        if (!a) return;
+        if (p.childNodes.length === 1 && a.getAttribute("href")?.startsWith("#")) p.remove();
+      });
+
+      Array.from(root.querySelectorAll("img")).forEach(img=>{
+        img.removeAttribute("style");
+        img.style.maxWidth = "100%";
+        img.style.borderRadius = "10px";
+      });
+
+      const demote = (tag, next)=>{
+        Array.from(root.querySelectorAll(tag)).forEach(h=>{
+          const nh = doc.createElement(next);
+          Array.from(h.attributes).forEach(a=>nh.setAttribute(a.name,a.value));
+          nh.innerHTML = h.innerHTML;
+          h.replaceWith(nh);
+        });
+      };
+      demote("h3","h4");
+      demote("h2","h3");
+      demote("h1","h2");
+
+      const walker = doc.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      const texts = [];
+      while(walker.nextNode()) texts.push(walker.currentNode);
+      texts.forEach(n=>{ n.textContent = (n.textContent || "").replace(/\*\*/g,"") });
+
+      container.innerHTML = root.innerHTML || html;
+    }).catch(()=>{ document.querySelector("#post-body").textContent = "加载失败"; });
+  </script>
+</body>
+</html>

@@ -64,6 +64,10 @@ opacity:.35;mask-image:radial-gradient(1200px 900px at 50% 40%,#000 30%,transpar
 .post hr{border:0;border-top:1px solid rgba(148,163,184,.35);margin:16px 0}
 .post code{background:rgba(2,6,23,.6);border:1px solid rgba(51,65,85,.7);padding:2px 6px;border-radius:8px;color:#e2e8f0}
 .post pre{background:rgba(2,6,23,.6);border:1px solid rgba(51,65,85,.7);padding:10px 12px;border-radius:12px;overflow:auto}
+.post table{width:100%;border-collapse:collapse;margin:12px 0;display:block;overflow-x:auto}
+.post th,.post td{border:1px solid rgba(51,65,85,.7);padding:8px 10px;vertical-align:top}
+.post th{background:rgba(30,41,59,.6);color:#f8fafc}
+.post mark{background:rgba(250,204,21,.18);color:#fde68a;padding:0 4px;border-radius:6px}
 .post img{display:block;margin:10px auto}
 .uploader input[type=file]{width:100%;padding:14px;border:1px dashed #334155;border-radius:12px;background:#0e1730;color:#94a3b8}
 .controls{display:flex;flex-direction:column;gap:12px;margin-top:14px}
