@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OWASP LLM Top 10：AI 应用攻击面地图与落地对策 | 网络安全技术博客</title>
+  <meta name="description" content="用 OWASP LLM Top 10 的视角梳理大模型应用攻击面：从 Prompt Injection 到 Excessive Agency，再到供应链与模型盗取，并给出工程化落地清单。" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="fx-bg" aria-hidden="true"></div>
+  <header class="site-header">
+    <nav class="topnav">
+      <a class="brand" href="../">网络安全博客</a>
+      <div class="links">
+        <a href="../">首页</a>
+        <a class="active" href="../blog/">博客</a>
+        <a href="../tools/">工具箱</a>
+        <a href="../about/">关于</a>
+      </div>
+    </nav>
+    <h1>OWASP LLM Top 10：AI 应用攻击面地图与落地对策</h1>
+    <p>AI 安全 · 体系化 · 风险建模</p>
+  </header>
+
+  <main class="container">
+    <article class="post">
+      <h2>为什么需要“攻击面地图”</h2>
+      <p>大模型应用的风险不只在“模型回答会不会胡说”。一旦引入检索（RAG）、工具调用（Functions/Plugins）、自动化代理（Agent）、多租户数据与第三方依赖，攻击面会快速膨胀。OWASP LLM Top 10 是一个很好的结构化框架，用来把风险从“提示词”扩展到“系统工程”。</p>
+
+      <h2>按能力分层理解攻击面</h2>
+      <ul>
+        <li><strong>输入层：</strong>用户输入、网页内容、知识库片段、邮件/工单、文件上传。</li>
+        <li><strong>推理层：</strong>系统提示词、上下文拼接、权限注入、模型路由、多模型编排。</li>
+        <li><strong>工具层：</strong>数据库/API、搜索、发信、工单、代码执行、云资源操作。</li>
+        <li><strong>数据层：</strong>训练/微调数据、向量库、缓存、日志、评测集。</li>
+        <li><strong>供应链：</strong>模型服务商、SDK、插件市场、第三方检索源、OCR/转写组件。</li>
+      </ul>
+
+      <h2>OWASP LLM Top 10（高层概览）</h2>
+      <h3>1) Prompt Injection（提示注入）</h3>
+      <p>核心问题：外部内容伪装成指令，诱导模型忽略规则、泄露信息或触发动作。RAG、网页摘要、邮件处理是高发场景。</p>
+      <p><strong>对策：</strong>引用块隔离、策略层控制动作、最小权限工具、输入/输出风险评分与审计。</p>
+
+      <h3>2) Insecure Output Handling（不安全输出处理）</h3>
+      <p>核心问题：模型输出被下游系统当作“可信输入”执行，引发 XSS、SQL 注入、模板注入、命令注入等二次漏洞。</p>
+      <p><strong>对策：</strong>输出编码与消毒、严格解析器、禁止把模型输出直接拼接到执行上下文。</p>
+
+      <h3>3) Sensitive Information Disclosure（敏感信息泄露）</h3>
+      <p>核心问题：提示词、知识库隐私、工具返回、日志中的敏感字段被输出或侧信道泄露。</p>
+      <p><strong>对策：</strong>数据最小化、字段级脱敏、密级标注、DLP/PII 检测、上下文裁剪。</p>
+
+      <h3>4) Training Data Poisoning（训练/微调数据投毒）</h3>
+      <p>核心问题：恶意样本混入训练/微调/检索源，造成后门行为或偏置输出。</p>
+      <p><strong>对策：</strong>数据溯源、采集白名单、签名与审计、回滚能力、隔离验证环境。</p>
+
+      <h3>5) Model Denial of Service（模型拒绝服务）</h3>
+      <p>核心问题：超长上下文、恶意多轮对话、复杂推理导致成本爆炸与延迟上升。</p>
+      <p><strong>对策：</strong>配额、速率限制、上下文上限、分级模型路由、缓存与中止策略。</p>
+
+      <h3>6) Supply Chain Vulnerabilities（供应链风险）</h3>
+      <p>核心问题：SDK、插件、模型服务、第三方检索源被篡改或引入恶意能力。</p>
+      <p><strong>对策：</strong>依赖锁定与校验、最小权限、出站控制、SBOM、第三方评估与隔离。</p>
+
+      <h3>7) Insecure Plugin Design（插件/工具设计不安全）</h3>
+      <p>核心问题：工具接口过宽、参数缺少校验、权限模型不清晰，导致越权与数据外泄。</p>
+      <p><strong>对策：</strong>参数白名单、权限分级、可见性控制、工具调用审计、人审门槛。</p>
+
+      <h3>8) Excessive Agency（过度代理/过度自治）</h3>
+      <p>核心问题：模型被赋予“可连续行动”的能力（多步计划、自动执行），一旦被诱导就会放大损害。</p>
+      <p><strong>对策：</strong>能力分级、关键动作强确认、沙箱执行、限制外发与破坏性操作。</p>
+
+      <h3>9) Overreliance（过度依赖）</h3>
+      <p>核心问题：把模型当作最终判断，忽视不确定性与幻觉，导致错误决策与合规问题。</p>
+      <p><strong>对策：</strong>置信提示、来源引用、强制证据、人工复核、灰度发布与回归评测。</p>
+
+      <h3>10) Model Theft（模型盗取）</h3>
+      <p>核心问题：通过 API 枚举、提示窃取、参数推断等方式进行模型或能力复制；或盗取专有提示词/检索策略。</p>
+      <p><strong>对策：</strong>访问控制、速率限制、输出水印/指纹、异常检测、密钥隔离与轮换。</p>
+
+      <h2>落地清单：从“能用”到“可控”</h2>
+      <ul>
+        <li><strong>权限：</strong>工具最小权限、环境隔离、关键动作审批。</li>
+        <li><strong>数据：</strong>分级与脱敏、向量库访问控制、日志最小化。</li>
+        <li><strong>工程：</strong>输出安全编码、严格解析、依赖锁定与供应链治理。</li>
+        <li><strong>运营：</strong>审计日志、回放能力、红队回归集、指标化告警。</li>
+      </ul>
+
+      <h2>结语</h2>
+      <p>把 OWASP LLM Top 10 当作“风险目录”，把你的系统拆成输入、推理、工具、数据与供应链五层逐一对照，你会发现很多问题其实是传统安全在新形态下的复用：最小权限、输入输出验证、供应链治理与可观测性。模型是新组件，但治理手段依然是工程。</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <span>建议把 Top 10 转成回归测试与控制项，持续验证，而不是一次性评审。</span>
+  </footer>
+</body>
+</html>
