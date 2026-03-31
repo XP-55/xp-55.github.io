@@ -38,8 +38,24 @@
     const url = "./Remote Access VPN 自动加载代理脚本脚本_20250102-content.html";
     fetch(url).then(r=>r.text()).then(html=>{
       const doc = new DOMParser().parseFromString(html,"text/html");
-      const body = doc.body ? doc.body.innerHTML : html;
-      document.querySelector("#post-body").innerHTML = body;
+      const container = document.querySelector("#post-body");
+      const body = doc.body || doc;
+      // 移除文档作者与时间等头部信息
+      Array.from(body.querySelectorAll("p")).forEach(p=>{
+        const t = (p.textContent||"").trim();
+        if(t.startsWith("文档作者：") || /^时间[:：]/.test(t)) p.remove();
+      });
+      // 处理图片路径（如为 file:// 或绝对路径，尝试映射到本地 assets 目录）
+      Array.from(body.querySelectorAll("img")).forEach(img=>{
+        const src = img.getAttribute("src")||"";
+        const filename = src.split("/").pop();
+        if(src.startsWith("file://") || /^https?:\/\//.test(src)===false){
+          img.setAttribute("src", `./Remote Access VPN 自动加载代理脚本脚本_20250102-assets/${filename}`);
+        }
+        img.style.maxWidth = "100%";
+        img.style.borderRadius = "10px";
+      });
+      container.innerHTML = body.innerHTML || html;
     }).catch(()=>{ document.querySelector("#post-body").textContent = "加载失败"; });
   </script>
 </body>
