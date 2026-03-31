@@ -1,0 +1,234 @@
+<p>文档作者：姜新鹏</p>
+<p>时间:2025/1/2</p>
+<h1 class="TOC-Heading" id="目录">目录</h1>
+<p><a href="#_Toc186736855">Remote Access VPN 自动加载代理脚本
+<span>1</span></a></p>
+<p><a href="#配置连接后脚本功能">1. 配置连接后脚本功能
+<span>2</span></a></p>
+<p><a href="#配置步骤">1.1. 配置步骤 <span>2</span></a></p>
+<p><a href="#为所有托管的远程访问安全网关配置连接后脚本">1.1.1.
+为所有托管的远程访问安全网关配置连接后脚本 <span>2</span></a></p>
+<p><a href="#修改-ttm-文件">1.1.2. 修改 TTM 文件 <span>2</span></a></p>
+<p><a href="#保存并应用更改">1.1.3. 保存并应用更改
+<span>3</span></a></p>
+<p><a href="#配置断开连接后的脚本功能">2. 配置断开连接后的脚本功能
+<span>4</span></a></p>
+<p><a href="#配置步骤-1">2.1. 配置步骤 <span>4</span></a></p>
+<p><a href="#在安全网关上准备">2.1.1. 在安全网关上准备
+<span>4</span></a></p>
+<p><a href="#修改-ttm-文件-1">2.1.2. 修改 TTM 文件
+<span>4</span></a></p>
+<p><a href="#保存并应用更改-1">2.1.3. 保存并应用更改
+<span>5</span></a></p>
+<p><a href="#配置详情">2.1.4. 配置详情 <span>5</span></a></p>
+<p><a href="#代理脚本编写">3. 代理脚本编写 <span>5</span></a></p>
+<p><a href="#connection_proxy.bat脚本文件内容">3.1.
+connection_proxy.bat脚本文件内容 <span>5</span></a></p>
+<p><a href="#disconnection_proxy.bat脚本文件内容">3.2.
+disconnection_proxy.bat脚本文件内容 <span>6</span></a></p>
+<p>文档说明:Remote Access VPN 拨入后无法获取DHCP 所携带的option 252
+字段。 且已确认GW 不支持dhcp server option 252.
+现使用自动加载代理脚本方式实现与option 252 类似的功能需求。</p>
+<p><strong>DHCP Option 252</strong> 是一种 DHCP 协议扩展选项，用于下发
+<strong>Web Proxy Auto-Discovery Protocol (WPAD)</strong> 的 URL
+给客户端，以便客户端自动获取代理设置文件（PAC 文件）的路径</p>
+<p>Option 252 数据结构</p>
+<p>Option 252 的内容以二进制形式封装在 DHCP 数据包中，具体格式如下：</p>
+<p><img src="remote-access-vpn-assets/media/image1.png"
+style="width:6.5in;height:1.20486in"
+alt="图形用户界面, 文本, 应用程序, 电子邮件 描述已自动生成" /></p>
+<h1 id="配置连接后脚本功能">配置连接后脚本功能</h1>
+<p><strong>连接后脚本（Post Connect Script）</strong> 功能可以在远程访问
+VPN
+客户端连接到安全网关后，在客户端计算机上运行一个脚本或可执行文件。</p>
+<p>确保脚本或可执行文件在客户端计算机上存在，并且路径正确。</p>
+<p><strong>重要说明</strong><br />
+连接后脚本以用户级权限运行。出于安全原因，如果用户在 Windows
+登录之前执行了 <strong>安全域登录（Secure Domain
+Login）</strong>，则不支持运行连接后脚本。</p>
+<h2 id="配置步骤">配置步骤</h2>
+<h3
+id="为所有托管的远程访问安全网关配置连接后脚本">为所有托管的远程访问安全网关配置连接后脚本</h3>
+<ol type="1">
+<li><p>关闭所有 SmartConsole 窗口。</p></li>
+<li><p>使用 <strong>GuiDBEdit Tool</strong> 连接到安全管理服务器 /
+域管理服务器。</p></li>
+<li><p>在左上角窗格中，进入 <strong>Table - Global Properties -
+global_properties</strong>。</p></li>
+<li><p>在右上角窗格中，选择
+<strong>firewall_properties</strong>。</p></li>
+<li><p>按 <strong>CTRL+F</strong>（或转到 <strong>Search 菜单 -
+Find</strong>），粘贴
+<strong>desktop_post_connect_script</strong>，然后点击 <strong>Find
+Next</strong>。</p></li>
+<li><p>在下方窗格中，确保 <strong>desktop_post_connect_script</strong>
+属性没有任何值（为空）。</p>
+<ul>
+<li><p>如果有值，右键单击该属性并选择 <strong>Reset</strong>。</p></li>
+</ul></li>
+<li><p>在右上角窗格中，选择
+<strong>firewall_properties</strong>。</p></li>
+<li><p>按 <strong>CTRL+F</strong>（或转到 <strong>Search 菜单 -
+Find</strong>），粘贴
+<strong>desktop_post_connect_script_show_window</strong>，然后点击
+<strong>Find Next</strong>。</p></li>
+<li><p>在下方窗格中，右键单击
+<strong>desktop_post_connect_script_show_window</strong> - 选择
+<strong>Edit...</strong> - 选择 <strong>"true"</strong> - 点击
+<strong>OK</strong>。</p>
+<ul>
+<li><p>默认值为 <strong>false</strong>，脚本运行在隐藏窗口中。</p></li>
+</ul></li>
+<li><p>保存更改：转到 <strong>File 菜单 - 点击 Save
+All</strong>。</p></li>
+<li><p>关闭数据库工具（GuiDBEdit Tool）。</p></li>
+<li><p>使用 SmartConsole 连接到安全管理服务器 / 域管理服务器。</p></li>
+<li><p>在每个安全网关 / 集群对象上安装策略。</p></li>
+</ol>
+<h3 id="修改-ttm-文件">修改 TTM 文件</h3>
+<p><strong>注意：</strong> 有关此 TTM 文件的更多信息，请参见
+<strong>sk75221</strong>。<br />
+a. 在安全网关 / 每个集群成员上连接到命令行。<br />
+b. 登录到 <strong>Expert 模式</strong>。<br />
+c. 备份当前的 $FWDIR/conf/trac_client_1.ttm 文件：</p>
+<p>cp -v $FWDIR/conf/trac_client_1.ttm{,_BKP}</p>
+<p>编辑当前的 $FWDIR/conf/trac_client_1.ttm 文件：</p>
+<p>vi $FWDIR/conf/trac_client_1.ttm</p>
+<p>:post_connect_script_show_window (</p>
+<p>:gateway (desktop_post_connect_script_show_window</p>
+<p>:valid (false)</p>
+<p>:default (false)</p>
+<p>)</p>
+<p>)</p>
+<p>:post_connect_script (</p>
+<p>:gateway (desktop_post_connect_script</p>
+<p>:valid (false)</p>
+<p>:default ("C:\connection_proxy.bat")</p>
+<p>)</p>
+<p>)</p>
+<p>备注： 修改完成后可通过命令检查配置是否正确</p>
+<p>“vpn check_ttm /opt/CPsuite-R81.20/fw1/conf/trac_client_1.ttm”</p>
+<p><img src="remote-access-vpn-assets/media/image2.png"
+style="width:6.5in;height:0.59444in" /></p>
+<h3 id="保存并应用更改">保存并应用更改</h3>
+<ul>
+<li><p>保存 TTM 文件的修改。</p></li>
+<li><p>在 <strong>SmartConsole</strong>
+中，向安全网关或集群成员安装策略。</p></li>
+</ul>
+<p><strong>注意：</strong> 新设置将在远程访问 VPN
+客户端下一次连接到安全网关或集群成员时生效。</p>
+<h1 id="配置断开连接后的脚本功能">配置断开连接后的脚本功能</h1>
+<p><strong>断开连接后的脚本（Post Disconnect Script）</strong>
+功能可以在远程访问 VPN 客户端断开与安全网关（Security
+Gateway）的连接后，在客户端计算机上运行一个脚本或可执行文件。</p>
+<p>确保脚本或可执行文件在客户端计算机上存在，并且路径正确。</p>
+<p><strong>重要说明</strong><br />
+断开连接后的脚本以用户级权限运行。出于安全原因，如果用户在 Windows
+登录之前执行了 <strong>安全域登录（Secure Domain
+Login）</strong>，则不支持运行断开连接后的脚本。</p>
+<h2 id="配置步骤-1">2.1. 配置步骤</h2>
+<h3 id="在安全网关上准备">在安全网关上准备</h3>
+<p>在每个适用的安全网关或集群成员上执行以下步骤：</p>
+<ol type="1">
+<li><p>连接到安全网关或集群成员的命令行。</p></li>
+<li><p>登录到 <strong>Expert 模式</strong>。</p></li>
+<li><p>备份当前的 $FWDIR/conf/trac_client_1.ttm 文件。</p></li>
+</ol>
+<h3 id="修改-ttm-文件-1">修改 TTM 文件</h3>
+<p>为了配置断开连接后的脚本功能，在当前的 $FWDIR/conf/trac_client_1.ttm
+文件中添加以下部分：</p>
+<p>:post_disconnect_script_show_window (</p>
+<p>:gateway (desktop_post_disconnect_script_show_window</p>
+<p>:valid (false)</p>
+<p>:default (false)</p>
+<p>)</p>
+<p>)</p>
+<p>:post_disconnect_script (</p>
+<p>:gateway (desktop_post_disconnect_script</p>
+<p>:valid (false)</p>
+<p>:default ("C:\disconnection_proxy.bat")</p>
+<p>)</p>
+<p>)</p>
+<p>:post_disconnect_mode (</p>
+<p>:gateway (desktop_post_disconnect_mode</p>
+<p>:valid (false)</p>
+<p>:default (1)</p>
+<p>)</p>
+<p>)</p>
+<h3 id="保存并应用更改-1">保存并应用更改</h3>
+<ul>
+<li><p>保存 TTM 文件的修改。</p></li>
+<li><p>在 <strong>SmartConsole</strong>
+中，向安全网关或集群成员安装策略。</p></li>
+</ul>
+<p><strong>注意：</strong> 新设置将在远程访问 VPN
+客户端下一次连接到安全网关或集群成员时生效。</p>
+<h3 id="配置详情">配置详情</h3>
+<ul>
+<li><p><strong>post_disconnect_script_show_window</strong></p>
+<ul>
+<li><p><strong>默认值：</strong> true 或 false。</p></li>
+<li><p>设置为 true 显示脚本窗口。</p></li>
+<li><p>设置为 false（默认）隐藏脚本窗口。</p></li>
+</ul></li>
+<li><p><strong>post_disconnect_script</strong></p>
+<ul>
+<li><p><strong>默认值：</strong> 客户端计算机上的脚本路径。</p></li>
+<li><p>默认值为空字符串。</p></li>
+</ul></li>
+<li><p><strong>post_disconnect_mode</strong></p>
+<ul>
+<li><p><strong>默认值：</strong> 0。</p></li>
+<li><p>可能值：</p>
+<ul>
+<li><p>0 - 功能禁用（默认）。</p></li>
+<li><p>1 - 仅用户发起的事件会运行脚本。</p></li>
+<li><p>2 - 所有事件都会运行脚本。</p></li>
+</ul></li>
+</ul></li>
+</ul>
+<h1 id="代理脚本编写">代理脚本编写</h1>
+<h2
+id="connection_proxy.bat脚本文件内容">connection_proxy.bat脚本文件内容</h2>
+<p>【@echo off</p>
+<p>REM VPN 连接后配置代理</p>
+<p>echo 正在设置代理...</p>
+<p>REM 设置代理服务器地址</p>
+<p>set PROXY_URL=http://192.168.66.152:7890</p>
+<p>REM 启用代理</p>
+<p>reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet
+Settings" /v ProxyEnable /t REG_DWORD /d 1 /f</p>
+<p>reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet
+Settings" /v ProxyServer /t REG_SZ /d %PROXY_URL% /f</p>
+<p>echo 代理已启用。</p>
+<p>Pause】</p>
+<p><img src="remote-access-vpn-assets/media/image3.png"
+style="width:6.5in;height:2.78542in"
+alt="图形用户界面, 文本, 应用程序 描述已自动生成" /></p>
+<h2
+id="disconnection_proxy.bat脚本文件内容">disconnection_proxy.bat脚本文件内容</h2>
+<p>【</p>
+<p>@echo off</p>
+<p>REM VPN 断开时取消代理</p>
+<p>echo 正在取消代理...</p>
+<p>REM 禁用代理</p>
+<p>reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet
+Settings" /v ProxyEnable /t REG_DWORD /d 0 /f</p>
+<p>reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet
+Settings" /v ProxyServer /f</p>
+<p>echo 代理已取消。</p>
+<p>Pause】</p>
+<p><img src="remote-access-vpn-assets/media/image4.png"
+style="width:6.5in;height:2.34653in"
+alt="图形用户界面, 应用程序, Word 描述已自动生成" /></p>
+<p>备注：
+编写好的脚本可批量通过GPO或者借助其它第三方桌管工具将文件推送致客户端特定的目录下。</p>
+<p>备注：</p>
+<p>参考 <a
+href="https://support.checkpoint.com/results/sk/sk180657">sk180657 -
+"Client is not compatible with the connected gateway." error message
+shows</a></p>
+<p>参考<a
+href="https://sc1.checkpoint.com/documents/RemoteAccessClients_forWindows_AdminGuide/Content/Topics-RA-VPN-for-Win/Configuring-Post-Connect-Scripts.htm?tocpath=Configuring%20Client%20Features%7C_____14">Configuring
+Post Connect Scripts</a></p>
