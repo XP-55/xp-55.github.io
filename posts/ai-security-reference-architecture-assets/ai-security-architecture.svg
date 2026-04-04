@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-label="AI security reference architecture diagram">
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-label="AI security reference architecture diagram (security view)">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0b1220"/>
@@ -8,84 +8,127 @@
       <stop offset="0" stop-color="#111827" stop-opacity="0.72"/>
       <stop offset="1" stop-color="#0f172a" stop-opacity="0.45"/>
     </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3b82f6" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#22c55e" stop-opacity="0.22"/>
+    </linearGradient>
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity="0.35"/>
     </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#60a5fa"/>
+    </marker>
     <style>
       .t { font: 700 26px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #f8fafc; }
       .s { font: 400 14px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #cbd5e1; }
       .h { font: 700 18px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #f8fafc; }
       .b { font: 400 13px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #cbd5e1; }
       .tag { font: 700 12px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #bfdbfe; letter-spacing: .14em; }
+      .k { font: 700 12px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #fde68a; letter-spacing: .12em; }
     </style>
   </defs>
 
   <rect x="0" y="0" width="1400" height="900" rx="18" fill="url(#bg)"/>
   <rect x="22" y="22" width="1356" height="856" rx="16" fill="none" stroke="#1f2a44"/>
-  <text x="52" y="78" class="t">AI 安全防护参考架构（从物理层到应用层）</text>
-  <text x="52" y="112" class="s">分层控制 + 生命周期治理：最小权限 · 强边界 · 可审计 · 可回归</text>
+  <text x="52" y="78" class="t">AI 安全防护参考架构（网络安全视角）</text>
+  <text x="52" y="112" class="s">围绕资产、攻击链与信任边界：入口控制 · 策略护栏 · 工具治理 · 证据链与回归</text>
 
   <g filter="url(#shadow)">
-    <g>
-      <rect x="60" y="160" width="1280" height="88" rx="14" fill="url(#card)" stroke="#1f2a44"/>
-      <text x="86" y="194" class="tag">PHYSICAL / HARDWARE</text>
-      <text x="86" y="224" class="b">机房与设备 · 固件完整性 · 安全启动 · GPU/驱动供应链治理</text>
-      <text x="920" y="194" class="h">控制点</text>
-      <text x="920" y="224" class="b">资产/介质管控 · attestation · 漏洞与版本基线</text>
-    </g>
-
-    <g>
-      <rect x="60" y="260" width="1280" height="88" rx="14" fill="url(#card)" stroke="#1f2a44"/>
-      <text x="86" y="294" class="tag">INFRASTRUCTURE</text>
-      <text x="86" y="324" class="b">OS/Network/Cloud · 分区隔离 · 出站控制 · KMS/HSM</text>
-      <text x="920" y="294" class="h">控制点</text>
-      <text x="920" y="324" class="b">零信任访问 · 运行时防护 · 镜像签名与准入</text>
-    </g>
-
-    <g>
-      <rect x="60" y="360" width="1280" height="88" rx="14" fill="url(#card)" stroke="#1f2a44"/>
-      <text x="86" y="394" class="tag">PLATFORM (MLOps/LLMOps)</text>
-      <text x="86" y="424" class="b">身份权限 · 环境分离 · 依赖治理 · 灰度/回滚 · 评测门禁</text>
-      <text x="920" y="394" class="h">控制点</text>
-      <text x="920" y="424" class="b">SBOM · 审批流 · 变更审计 · 影子流量对比</text>
-    </g>
-
-    <g>
-      <rect x="60" y="460" width="1280" height="88" rx="14" fill="url(#card)" stroke="#1f2a44"/>
-      <text x="86" y="494" class="tag">DATA (TRAIN / RAG / LOGS)</text>
-      <text x="86" y="524" class="b">分级与脱敏 · 向量库租户隔离 · 投毒溯源 · 日志最小化</text>
-      <text x="920" y="494" class="h">控制点</text>
-      <text x="920" y="524" class="b">权限召回过滤 · 数据回滚 · 访问审计</text>
-    </g>
-
-    <g>
-      <rect x="60" y="560" width="1280" height="88" rx="14" fill="url(#card)" stroke="#1f2a44"/>
-      <text x="86" y="594" class="tag">MODEL</text>
-      <text x="86" y="624" class="b">模型资产与溯源 · 速率限制 · 异常检测 · 安全评测与回归</text>
-      <text x="920" y="594" class="h">控制点</text>
-      <text x="920" y="624" class="b">模型版本管理 · 防盗取/滥用 · 安全基线</text>
-    </g>
-
-    <g>
-      <rect x="60" y="660" width="1280" height="88" rx="14" fill="url(#card)" stroke="#1f2a44"/>
-      <text x="86" y="694" class="tag">PROMPT / CONTEXT</text>
-      <text x="86" y="724" class="b">系统提示词治理 · 引用块隔离 · schema 输出约束 · 注入检测</text>
-      <text x="920" y="694" class="h">控制点</text>
-      <text x="920" y="724" class="b">强边界 · 版本化 · 结构化校验</text>
-    </g>
-
-    <g>
-      <rect x="60" y="760" width="1280" height="88" rx="14" fill="url(#card)" stroke="#1f2a44"/>
-      <text x="86" y="794" class="tag">TOOLS / API / APP</text>
-      <text x="86" y="824" class="b">工具最小权限 · 参数白名单 · 关键动作审批 · 输出安全处理 · 多租户隔离</text>
-      <text x="920" y="794" class="h">控制点</text>
-      <text x="920" y="824" class="b">沙箱 · 审计回放 · 速率限制 · Kill Switch</text>
-    </g>
+    <rect x="60" y="136" width="1280" height="44" rx="12" fill="url(#accent)" stroke="rgba(59,130,246,0.35)"/>
+    <text x="84" y="164" class="h">治理与运营（贯穿全链路）</text>
+    <text x="420" y="164" class="b">版本化 · 变更审计 · 回滚/降级 · 安全回归 · 合规与策略</text>
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="1040" y="122" width="300" height="40" rx="12" fill="rgba(59,130,246,0.18)" stroke="rgba(59,130,246,0.35)"/>
-    <text x="1060" y="148" class="h">治理与运营（贯穿全层）</text>
-    <text x="60" y="142" class="s">监控指标 · 审计日志 · 回放复盘 · 回归评测 · 应急降级</text>
+    <rect x="80" y="220" width="300" height="150" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+    <text x="104" y="252" class="tag">UNTRUSTED INPUT</text>
+    <text x="104" y="282" class="h">用户 / 攻击者</text>
+    <text x="104" y="308" class="b">自然语言 · 文件上传</text>
+    <text x="104" y="332" class="b">多轮对话 · 注入意图</text>
+
+    <rect x="80" y="390" width="300" height="130" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+    <text x="104" y="422" class="tag">EXTERNAL CONTENT</text>
+    <text x="104" y="452" class="h">外部内容源</text>
+    <text x="104" y="478" class="b">网页/邮件/工单/知识库</text>
+    <text x="104" y="502" class="b">RAG 污染与供应链注入</text>
   </g>
+
+  <g filter="url(#shadow)">
+    <rect x="430" y="250" width="360" height="220" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+    <text x="454" y="282" class="tag">APP GATEWAY</text>
+    <text x="454" y="312" class="h">AI 应用入口 / API 网关</text>
+    <text x="454" y="340" class="b">鉴权 · 租户隔离 · 速率限制</text>
+    <text x="454" y="364" class="b">输入风险评分 · 结构化解析</text>
+    <text x="454" y="388" class="b">请求追踪 ID · 审计上下文</text>
+    <text x="454" y="412" class="k">信任边界：外部 → 内部</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="830" y="230" width="510" height="260" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+    <text x="854" y="262" class="tag">POLICY & CONTEXT</text>
+    <text x="854" y="292" class="h">策略护栏 + 上下文装配</text>
+    <text x="854" y="320" class="b">系统提示词版本化 · 引用块隔离</text>
+    <text x="854" y="344" class="b">敏感信息/注入检测 · 输出 schema 约束</text>
+    <text x="854" y="368" class="b">RAG 召回按权限过滤 · 上下文裁剪</text>
+    <text x="854" y="392" class="k">信任边界：数据 ≠ 指令</text>
+    <rect x="854" y="410" width="462" height="60" rx="12" fill="rgba(2,6,23,0.55)" stroke="rgba(51,65,85,0.7)"/>
+    <text x="878" y="438" class="b">输出前：拒绝高风险意图 / 输出后：编码与严格解析</text>
+    <text x="878" y="462" class="b">把模型输出当作不可信输入处理</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="520" y="520" width="360" height="150" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+    <text x="544" y="552" class="tag">LLM RUNTIME</text>
+    <text x="544" y="582" class="h">模型推理与路由</text>
+    <text x="544" y="610" class="b">模型版本 · 参数 · 路由策略</text>
+    <text x="544" y="634" class="b">成本/延迟预算 · DoS 防护</text>
+    <text x="544" y="658" class="k">信任边界：推理器 ≠ 执行器</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="920" y="520" width="420" height="150" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+    <text x="944" y="552" class="tag">TOOL BROKER</text>
+    <text x="944" y="582" class="h">工具代理 / 执行网关</text>
+    <text x="944" y="610" class="b">参数白名单 · 最小权限 · 关键动作审批</text>
+    <text x="944" y="634" class="b">沙箱执行 · 出站控制 · 结果最小化</text>
+    <text x="944" y="658" class="k">信任边界：模型 → 真实世界</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="920" y="690" width="200" height="140" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+    <text x="944" y="722" class="tag">DATA</text>
+    <text x="944" y="752" class="h">知识库/向量库</text>
+    <text x="944" y="780" class="b">权限召回过滤</text>
+    <text x="944" y="804" class="b">投毒溯源/回滚</text>
+
+    <rect x="1140" y="690" width="200" height="140" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+    <text x="1164" y="722" class="tag">ENTERPRISE</text>
+    <text x="1164" y="752" class="h">业务系统/API</text>
+    <text x="1164" y="780" class="b">数据最小化</text>
+    <text x="1164" y="804" class="b">密钥隔离/轮换</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="80" y="560" width="400" height="270" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+    <text x="104" y="592" class="tag">OBSERVABILITY</text>
+    <text x="104" y="622" class="h">审计与检测（证据链）</text>
+    <text x="104" y="650" class="b">输入/引用/工具调用/输出/成本延迟</text>
+    <text x="104" y="674" class="b">泄露检测 · 越权检测 · 异常外发</text>
+    <text x="104" y="698" class="b">告警与自动降级（kill switch）</text>
+    <rect x="104" y="716" width="352" height="92" rx="12" fill="rgba(2,6,23,0.55)" stroke="rgba(51,65,85,0.7)"/>
+    <text x="126" y="746" class="tag">EVAL / RED TEAM / REGRESSION</text>
+    <text x="126" y="772" class="b">安全基线用例集 + CI/灰度门禁</text>
+    <text x="126" y="796" class="b">对比基线，阻断风险退化</text>
+  </g>
+
+  <path d="M380 295 L420 295" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M380 455 L420 390" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M790 360 L820 360" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M610 470 L650 510" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M1090 490 L760 520" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M880 595 L910 595" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M1120 760 L1120 670" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M1240 760 L1240 670" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M700 670 L480 670" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M880 600 C760 640, 650 680, 480 690" stroke="rgba(96,165,250,0.45)" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
 </svg>
