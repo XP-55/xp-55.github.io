@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-label="AI security reference architecture diagram">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#0e1730"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#111827" stop-opacity="0.72"/>
+      <stop offset="1" stop-color="#0f172a" stop-opacity="0.45"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+    <style>
+      .t { font: 700 26px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #f8fafc; }
+      .s { font: 400 14px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #cbd5e1; }
+      .h { font: 700 18px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #f8fafc; }
+      .b { font: 400 13px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #cbd5e1; }
+      .tag { font: 700 12px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #bfdbfe; letter-spacing: .14em; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1400" height="900" rx="18" fill="url(#bg)"/>
+  <rect x="22" y="22" width="1356" height="856" rx="16" fill="none" stroke="#1f2a44"/>
+  <text x="52" y="78" class="t">AI 安全防护参考架构（从物理层到应用层）</text>
+  <text x="52" y="112" class="s">分层控制 + 生命周期治理：最小权限 · 强边界 · 可审计 · 可回归</text>
+
+  <g filter="url(#shadow)">
+    <g>
+      <rect x="60" y="160" width="1280" height="88" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+      <text x="86" y="194" class="tag">PHYSICAL / HARDWARE</text>
+      <text x="86" y="224" class="b">机房与设备 · 固件完整性 · 安全启动 · GPU/驱动供应链治理</text>
+      <text x="920" y="194" class="h">控制点</text>
+      <text x="920" y="224" class="b">资产/介质管控 · attestation · 漏洞与版本基线</text>
+    </g>
+
+    <g>
+      <rect x="60" y="260" width="1280" height="88" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+      <text x="86" y="294" class="tag">INFRASTRUCTURE</text>
+      <text x="86" y="324" class="b">OS/Network/Cloud · 分区隔离 · 出站控制 · KMS/HSM</text>
+      <text x="920" y="294" class="h">控制点</text>
+      <text x="920" y="324" class="b">零信任访问 · 运行时防护 · 镜像签名与准入</text>
+    </g>
+
+    <g>
+      <rect x="60" y="360" width="1280" height="88" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+      <text x="86" y="394" class="tag">PLATFORM (MLOps/LLMOps)</text>
+      <text x="86" y="424" class="b">身份权限 · 环境分离 · 依赖治理 · 灰度/回滚 · 评测门禁</text>
+      <text x="920" y="394" class="h">控制点</text>
+      <text x="920" y="424" class="b">SBOM · 审批流 · 变更审计 · 影子流量对比</text>
+    </g>
+
+    <g>
+      <rect x="60" y="460" width="1280" height="88" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+      <text x="86" y="494" class="tag">DATA (TRAIN / RAG / LOGS)</text>
+      <text x="86" y="524" class="b">分级与脱敏 · 向量库租户隔离 · 投毒溯源 · 日志最小化</text>
+      <text x="920" y="494" class="h">控制点</text>
+      <text x="920" y="524" class="b">权限召回过滤 · 数据回滚 · 访问审计</text>
+    </g>
+
+    <g>
+      <rect x="60" y="560" width="1280" height="88" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+      <text x="86" y="594" class="tag">MODEL</text>
+      <text x="86" y="624" class="b">模型资产与溯源 · 速率限制 · 异常检测 · 安全评测与回归</text>
+      <text x="920" y="594" class="h">控制点</text>
+      <text x="920" y="624" class="b">模型版本管理 · 防盗取/滥用 · 安全基线</text>
+    </g>
+
+    <g>
+      <rect x="60" y="660" width="1280" height="88" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+      <text x="86" y="694" class="tag">PROMPT / CONTEXT</text>
+      <text x="86" y="724" class="b">系统提示词治理 · 引用块隔离 · schema 输出约束 · 注入检测</text>
+      <text x="920" y="694" class="h">控制点</text>
+      <text x="920" y="724" class="b">强边界 · 版本化 · 结构化校验</text>
+    </g>
+
+    <g>
+      <rect x="60" y="760" width="1280" height="88" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+      <text x="86" y="794" class="tag">TOOLS / API / APP</text>
+      <text x="86" y="824" class="b">工具最小权限 · 参数白名单 · 关键动作审批 · 输出安全处理 · 多租户隔离</text>
+      <text x="920" y="794" class="h">控制点</text>
+      <text x="920" y="824" class="b">沙箱 · 审计回放 · 速率限制 · Kill Switch</text>
+    </g>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1040" y="122" width="300" height="40" rx="12" fill="rgba(59,130,246,0.18)" stroke="rgba(59,130,246,0.35)"/>
+    <text x="1060" y="148" class="h">治理与运营（贯穿全层）</text>
+    <text x="60" y="142" class="s">监控指标 · 审计日志 · 回放复盘 · 回归评测 · 应急降级</text>
+  </g>
+</svg>
