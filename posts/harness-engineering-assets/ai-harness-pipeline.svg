@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-label="AI Harness pipeline diagram">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#0e1730"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#111827" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#0f172a" stop-opacity="0.45"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#60a5fa"/>
+    </marker>
+    <style>
+      .t { font: 600 20px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #f8fafc; }
+      .s { font: 400 14px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #cbd5e1; }
+      .k { font: 600 12px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #bfdbfe; letter-spacing: .12em; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="420" rx="18" fill="url(#bg)"/>
+  <rect x="22" y="22" width="1156" height="376" rx="16" fill="none" stroke="#1f2a44"/>
+  <text x="46" y="72" class="t">AI Harness Pipeline（评测/红队/回归通用）</text>
+  <text x="46" y="102" class="s">把场景定义、执行、判定与证据链串起来，让结果可复现、可度量、可审计</text>
+
+  <g filter="url(#shadow)">
+    <g>
+      <rect x="60" y="140" width="200" height="170" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+      <text x="80" y="176" class="k">CASE SPEC</text>
+      <text x="80" y="210" class="t" font-size="18">用例定义</text>
+      <text x="80" y="238" class="s">输入 / 上下文</text>
+      <text x="80" y="262" class="s">允许工具 / 约束</text>
+      <text x="80" y="286" class="s">期望 / 评分维度</text>
+    </g>
+
+    <g>
+      <rect x="300" y="140" width="200" height="170" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+      <text x="320" y="176" class="k">RUNNER</text>
+      <text x="320" y="210" class="t" font-size="18">执行器</text>
+      <text x="320" y="238" class="s">模型与参数</text>
+      <text x="320" y="262" class="s">提示词 / 路由</text>
+      <text x="320" y="286" class="s">RAG / Agent 规划</text>
+    </g>
+
+    <g>
+      <rect x="540" y="140" width="200" height="170" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+      <text x="560" y="176" class="k">JUDGE</text>
+      <text x="560" y="210" class="t" font-size="18">评判器</text>
+      <text x="560" y="238" class="s">规则判定优先</text>
+      <text x="560" y="262" class="s">模型判定辅助</text>
+      <text x="560" y="286" class="s">阈值与抽检</text>
+    </g>
+
+    <g>
+      <rect x="780" y="140" width="200" height="170" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+      <text x="800" y="176" class="k">ARTIFACTS</text>
+      <text x="800" y="210" class="t" font-size="18">证据采集</text>
+      <text x="800" y="238" class="s">引用 / 工具调用</text>
+      <text x="800" y="262" class="s">日志 / Trace</text>
+      <text x="800" y="286" class="s">成本 / 延迟</text>
+    </g>
+
+    <g>
+      <rect x="1020" y="140" width="120" height="170" rx="14" fill="url(#card)" stroke="#1f2a44"/>
+      <text x="1038" y="176" class="k">DIFF</text>
+      <text x="1038" y="210" class="t" font-size="18">对比</text>
+      <text x="1038" y="238" class="s">基线</text>
+      <text x="1038" y="262" class="s">变化点</text>
+      <text x="1038" y="286" class="s">报告</text>
+    </g>
+  </g>
+
+  <path d="M260 225 L296 225" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M500 225 L536 225" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M740 225 L776 225" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M980 225 L1016 225" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+</svg>

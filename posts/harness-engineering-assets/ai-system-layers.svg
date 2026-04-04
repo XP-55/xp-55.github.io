@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-label="AI system layers and controls diagram">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#0e1730"/>
+    </linearGradient>
+    <linearGradient id="lane" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#111827" stop-opacity="0.65"/>
+      <stop offset="1" stop-color="#0f172a" stop-opacity="0.4"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+    <style>
+      .t { font: 600 22px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #f8fafc; }
+      .s { font: 400 14px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #cbd5e1; }
+      .h { font: 700 16px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #f8fafc; }
+      .b { font: 400 13px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #cbd5e1; }
+      .tag { font: 600 12px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #bfdbfe; letter-spacing: .12em; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="520" rx="18" fill="url(#bg)"/>
+  <rect x="22" y="22" width="1156" height="476" rx="16" fill="none" stroke="#1f2a44"/>
+  <text x="46" y="72" class="t">LLM 应用的分层：Harness 应该验证哪些东西</text>
+  <text x="46" y="102" class="s">从输入到工具与数据层，分别定义“可执行的边界”和“可审计的证据”</text>
+
+  <g filter="url(#shadow)">
+    <g>
+      <rect x="60" y="140" width="1080" height="78" rx="14" fill="url(#lane)" stroke="#1f2a44"/>
+      <text x="86" y="170" class="tag">INPUT</text>
+      <text x="86" y="198" class="b">用户输入 / 文件上传 / 网页内容 / 工单与邮件</text>
+      <text x="760" y="170" class="h">控制点</text>
+      <text x="760" y="198" class="b">风险评分 · 结构化解析 · 引用块隔离</text>
+    </g>
+
+    <g>
+      <rect x="60" y="234" width="1080" height="78" rx="14" fill="url(#lane)" stroke="#1f2a44"/>
+      <text x="86" y="264" class="tag">CONTEXT</text>
+      <text x="86" y="292" class="b">系统提示词 / 路由 / RAG 拼接 / 会话状态</text>
+      <text x="760" y="264" class="h">控制点</text>
+      <text x="760" y="292" class="b">版本化 · 上下文裁剪 · 权限标签</text>
+    </g>
+
+    <g>
+      <rect x="60" y="328" width="1080" height="78" rx="14" fill="url(#lane)" stroke="#1f2a44"/>
+      <text x="86" y="358" class="tag">MODEL</text>
+      <text x="86" y="386" class="b">推理与生成（非确定性）</text>
+      <text x="760" y="358" class="h">控制点</text>
+      <text x="760" y="386" class="b">判定规则 · 评分阈值 · 幻觉与泄露检测</text>
+    </g>
+
+    <g>
+      <rect x="60" y="422" width="1080" height="78" rx="14" fill="url(#lane)" stroke="#1f2a44"/>
+      <text x="86" y="452" class="tag">TOOLS & DATA</text>
+      <text x="86" y="480" class="b">数据库/API/外发/工单系统 · 向量库/日志/缓存</text>
+      <text x="760" y="452" class="h">控制点</text>
+      <text x="760" y="480" class="b">最小权限 · 参数白名单 · 审计回放 · 沙箱</text>
+    </g>
+  </g>
+</svg>

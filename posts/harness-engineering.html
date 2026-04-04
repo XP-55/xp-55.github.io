@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Harness Engineering：给大模型应用做“可回归的验证体系” | 网络安全技术博客</title>
+  <meta name="description" content="Harness Engineering 是 AI 落地中的新热词：把 LLM/RAG/Agent 的评测、红队与回归做成工程体系，解决不稳定、不可控与不可审计。" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="fx-bg" aria-hidden="true"></div>
+  <header class="site-header">
+    <nav class="topnav">
+      <a class="brand" href="../">网络安全博客</a>
+      <div class="links">
+        <a href="../">首页</a>
+        <a class="active" href="../blog/">博客</a>
+        <a href="../tools/">工具箱</a>
+        <a href="../about/">关于</a>
+      </div>
+    </nav>
+    <h1>AI Harness Engineering：给大模型应用做“可回归的验证体系”</h1>
+    <p>LLMOps · 评测工程 · AI 安全</p>
+  </header>
+
+  <main class="container">
+    <article class="post">
+      <h2>背景：为什么 AI 领域突然开始讨论 Harness Engineering</h2>
+      <p>大模型应用从“演示能跑”走向“线上可控”，通常会遇到同一组痛点：输出不稳定、上线后质量漂移、偶发越权工具调用、敏感信息泄露难以复盘、成本与延迟不可控。于是一个来自测试工程的老概念被重新搬上台面：<strong>Harness</strong>——把验证做成工程。</p>
+
+      <h2>一句话定义：AI Harness 是什么</h2>
+      <p>在 AI/LLM 语境里，harness 指一套用于<strong>可复现运行</strong> LLM/RAG/Agent 场景，并对输出/行为做<strong>可度量判定</strong>的外部体系。它通常包含：驱动执行、环境夹具、评判器（oracle/judge）、证据采集与回放能力。</p>
+      <figure>
+        <img src="harness-engineering-assets/ai-harness-pipeline.svg" alt="AI Harness pipeline：case spec、runner、judge、artifacts、diff/report" />
+        <figcaption>AI Harness 的通用流水线：用例定义 → 执行 → 判定 → 证据 → 对比报告</figcaption>
+      </figure>
+
+      <h2>它在解决什么问题</h2>
+      <ul>
+        <li><strong>可复现：</strong>同一套 case 在不同模型版本、不同提示词版本下能回放并对比差异。</li>
+        <li><strong>可度量：</strong>质量、安全、成本、延迟都有指标与阈值，而不是“感觉变差了”。</li>
+        <li><strong>可持续回归：</strong>每次改 prompt、改检索、改工具权限，都能自动回归。</li>
+        <li><strong>可审计：</strong>保留证据链：输入、引用、工具调用序列、关键中间态与输出。</li>
+      </ul>
+
+      <h2>AI 场景里的三类 Harness</h2>
+      <h3>1) Evaluation Harness（评测）</h3>
+      <p>用于回答“改了之后是不是更好”。典型覆盖：问答准确性、引用正确性、任务完成率、结构化输出合规、延迟与成本。</p>
+
+      <h3>2) Red-team Harness（红队/安全回归）</h3>
+      <p>用于回答“改了之后是不是更安全”。典型覆盖：提示注入、数据外泄、越权工具调用、绕过策略、内容安全与合规边界。它更像 OWASP LLM Top 10 的工程化落地。</p>
+
+      <h3>3) Regression Harness（回归）</h3>
+      <p>用于回答“改动有没有把以前好的东西弄坏”。它依赖一组稳定的 golden set（黄金用例）与明确阈值，通常挂在 CI 上做 smoke/PR gating。</p>
+      <figure>
+        <img src="harness-engineering-assets/ai-harness-types.svg" alt="AI Harness types：evaluation、red team、regression" />
+        <figcaption>同一套工程骨架，三种目标：更好 / 更安全 / 不退化</figcaption>
+      </figure>
+
+      <h2>一个可用的 AI Harness 通常包含什么</h2>
+      <ul>
+        <li><strong>Case Spec：</strong>用例定义（用户问题、上下文、知识库片段、允许工具、预期与约束）。</li>
+        <li><strong>Runner：</strong>执行器（模型参数、系统提示词版本、RAG 策略、Agent 规划器）。</li>
+        <li><strong>Judge：</strong>评判器（规则判定 + 模型判定 + 人审抽检），输出分数与原因。</li>
+        <li><strong>Artifacts：</strong>证据采集（引用、工具调用、链路日志、token/latency/cost）。</li>
+        <li><strong>Diff：</strong>对比器（与基线版本对比，输出变化点与回归原因）。</li>
+      </ul>
+
+      <h2>设计要点：AI Harness 最容易翻车的地方</h2>
+      <h3>1) 非确定性（Non-determinism）</h3>
+      <p>同一个输入可能得到不同输出。解决思路不是追求“字面一致”，而是把判定从字符串匹配升级为：结构化输出校验、关键事实抽取、引用一致性、统计阈值与置信区间。</p>
+      <figure>
+        <img src="harness-engineering-assets/ai-system-layers.svg" alt="LLM 应用分层与控制点：input、context、model、tools & data" />
+        <figcaption>分层定义控制点：输入/上下文/模型/工具与数据层分别设置边界与审计</figcaption>
+      </figure>
+
+      <h3>2) 评判器本身会骗人</h3>
+      <p>Judge 如果也是模型，很可能受提示注入影响或产生幻觉。工程上通常采用多重护栏：规则优先、模型判定只给辅助分、对高风险类目做抽检与对抗样本回归。</p>
+
+      <h3>3) 把“上下文”当作代码来管理</h3>
+      <p>系统提示词、路由策略、RAG 过滤、工具权限、知识库版本，都应该版本化与可回滚，否则回归报告无法解释。</p>
+
+      <h2>一个极简例子：LLM 评测用例的结构（示意）</h2>
+      <p>下面强调“场景定义 + 运行配置 + 判定规则 + 证据采集”，可用于评测、红队与回归：</p>
+      <pre class="codeblock">
+cases:
+  - name: "rag-basic"
+    input: "解释公司内的密码策略要求"
+    context:
+      kb: ["policy/password.md@v3"]
+      tools: ["search_kb"]
+    expect:
+      must_cite: true
+      forbidden:
+        - "输出内部邮箱"
+        - "泄露系统提示词"
+      rubric:
+        - "关键条款覆盖"
+        - "引用与结论一致"
+
+run:
+  result = app.run(input, context, model="gpt-4.1-mini", temperature=0.2)
+  artifacts.save(result.trace, result.citations, result.cost, result.latency)
+  score = judge(result, expect)
+      </pre>
+
+      <h2>落地建议：从 0 到 1 怎么做</h2>
+      <ul>
+        <li><strong>先做 golden set：</strong>20～50 条高价值用例，覆盖最核心路径与高风险场景。</li>
+        <li><strong>先做“能解释”的指标：</strong>引用正确、结构化输出合规、工具调用合规、成本与延迟。</li>
+        <li><strong>把回归挂到 CI：</strong>每次改 prompt/RAG/tools 都跑一遍，防止暗雷。</li>
+        <li><strong>再做安全回归：</strong>把提示注入、越权调用、数据外泄等按类目做测试集。</li>
+      </ul>
+
+      <h2>结语</h2>
+      <p>AI Harness Engineering 可以理解为 LLM 应用时代的“测试工程升级版”：对象从函数变成了模型与代理系统，判定从断言变成了评分与证据链，但目标不变——让系统可控、可回归、可审计。</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <span>后续我会补一篇：LLM 应用的评测 harness（RAG + Tools + Guardrails）如何落地。</span>
+  </footer>
+</body>
+</html>

@@ -69,6 +69,8 @@ opacity:.35;mask-image:radial-gradient(1200px 900px at 50% 40%,#000 30%,transpar
 .post th{background:rgba(30,41,59,.6);color:#f8fafc}
 .post mark{background:rgba(250,204,21,.18);color:#fde68a;padding:0 4px;border-radius:6px}
 .post img{display:block;margin:10px auto}
+.post figure{margin:14px 0}
+.post figcaption{margin-top:6px;color:#94a3b8;font-size:13px;text-align:center}
 .uploader input[type=file]{width:100%;padding:14px;border:1px dashed #334155;border-radius:12px;background:#0e1730;color:#94a3b8}
 .controls{display:flex;flex-direction:column;gap:12px;margin-top:14px}
 .control{display:flex;align-items:center;gap:12px}
