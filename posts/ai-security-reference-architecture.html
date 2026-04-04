@@ -33,142 +33,184 @@
 
       <h2>参考架构图（攻防视角）</h2>
       <figure>
-        <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-label="AI security reference architecture diagram (security view)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="576" viewBox="0 0 1024 576" role="img" aria-label="AI security architecture diagram (RAG/LLM attack surface)">
           <defs>
-            <linearGradient id="aisa-bg" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#0b1220"/>
-              <stop offset="1" stop-color="#0e1730"/>
-            </linearGradient>
-            <linearGradient id="aisa-card" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#111827" stop-opacity="0.72"/>
-              <stop offset="1" stop-color="#0f172a" stop-opacity="0.45"/>
-            </linearGradient>
-            <linearGradient id="aisa-accent" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#3b82f6" stop-opacity="0.35"/>
-              <stop offset="1" stop-color="#22c55e" stop-opacity="0.22"/>
-            </linearGradient>
-            <filter id="aisa-shadow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity="0.35"/>
+            <filter id="ai2-shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000" flood-opacity="0.22"/>
             </filter>
-            <marker id="aisa-arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-              <path d="M0,0 L10,5 L0,10 Z" fill="#60a5fa"/>
+            <marker id="ai2-arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+              <path d="M0,0 L10,5 L0,10 Z" fill="#22c55e"/>
             </marker>
             <style>
-              .aisa-t { font: 700 26px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #f8fafc; }
-              .aisa-s { font: 400 14px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #cbd5e1; }
-              .aisa-h { font: 700 18px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #f8fafc; }
-              .aisa-b { font: 400 13px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #cbd5e1; }
-              .aisa-tag { font: 700 12px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #bfdbfe; letter-spacing: .14em; }
-              .aisa-k { font: 700 12px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #fde68a; letter-spacing: .12em; }
+              .ai2-t { font: 700 22px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #0b1220; }
+              .ai2-h { font: 700 14px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #0b1220; }
+              .ai2-s { font: 500 12px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #0b1220; }
+              .ai2-k { font: 600 12px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #14532d; }
             </style>
           </defs>
 
-          <rect x="0" y="0" width="1400" height="900" rx="18" fill="url(#aisa-bg)"/>
-          <rect x="22" y="22" width="1356" height="856" rx="16" fill="none" stroke="#1f2a44"/>
-          <text x="52" y="78" class="aisa-t">AI 安全防护参考架构（网络安全视角）</text>
-          <text x="52" y="112" class="aisa-s">围绕资产、攻击链与信任边界：入口控制 · 策略护栏 · 工具治理 · 证据链与回归</text>
+          <rect x="0" y="0" width="1024" height="576" rx="16" fill="#ffffff"/>
 
-          <g filter="url(#aisa-shadow)">
-            <rect x="60" y="136" width="1280" height="44" rx="12" fill="url(#aisa-accent)" stroke="rgba(59,130,246,0.35)"/>
-            <text x="84" y="164" class="aisa-h">治理与运营（贯穿全链路）</text>
-            <text x="420" y="164" class="aisa-b">版本化 · 变更审计 · 回滚/降级 · 安全回归 · 合规与策略</text>
+          <g filter="url(#ai2-shadow)">
+            <rect x="18" y="184" width="94" height="88" rx="14" fill="#fff" stroke="#22c55e" stroke-width="3" stroke-dasharray="7 6"/>
+            <circle cx="65" cy="214" r="10" fill="none" stroke="#22c55e" stroke-width="3"/>
+            <path d="M45 246c7-10 34-10 40 0" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round"/>
+            <text x="47" y="266" class="ai2-s">User</text>
           </g>
 
-          <g filter="url(#aisa-shadow)">
-            <rect x="80" y="220" width="300" height="150" rx="14" fill="url(#aisa-card)" stroke="#1f2a44"/>
-            <text x="104" y="252" class="aisa-tag">UNTRUSTED INPUT</text>
-            <text x="104" y="282" class="aisa-h">用户 / 攻击者</text>
-            <text x="104" y="308" class="aisa-b">自然语言 · 文件上传</text>
-            <text x="104" y="332" class="aisa-b">多轮对话 · 注入意图</text>
-
-            <rect x="80" y="390" width="300" height="130" rx="14" fill="url(#aisa-card)" stroke="#1f2a44"/>
-            <text x="104" y="422" class="aisa-tag">EXTERNAL CONTENT</text>
-            <text x="104" y="452" class="aisa-h">外部内容源</text>
-            <text x="104" y="478" class="aisa-b">网页/邮件/工单/知识库</text>
-            <text x="104" y="502" class="aisa-b">RAG 污染与供应链注入</text>
+          <g>
+            <path d="M112 220 L158 220" stroke="#111827" stroke-width="2" stroke-dasharray="3 4" marker-end="url(#ai2-arrow)"/>
+            <text x="118" y="206" class="ai2-s">Query</text>
+            <path d="M158 248 L112 248" stroke="#111827" stroke-width="2" stroke-dasharray="3 4" marker-end="url(#ai2-arrow)"/>
+            <text x="118" y="266" class="ai2-s">Response</text>
           </g>
 
-          <g filter="url(#aisa-shadow)">
-            <rect x="430" y="250" width="360" height="220" rx="14" fill="url(#aisa-card)" stroke="#1f2a44"/>
-            <text x="454" y="282" class="aisa-tag">APP GATEWAY</text>
-            <text x="454" y="312" class="aisa-h">AI 应用入口 / API 网关</text>
-            <text x="454" y="340" class="aisa-b">鉴权 · 租户隔离 · 速率限制</text>
-            <text x="454" y="364" class="aisa-b">输入风险评分 · 结构化解析</text>
-            <text x="454" y="388" class="aisa-b">请求追踪 ID · 审计上下文</text>
-            <text x="454" y="412" class="aisa-k">信任边界：外部 → 内部</text>
+          <g filter="url(#ai2-shadow)">
+            <rect x="158" y="176" width="152" height="112" rx="14" fill="#fff" stroke="#22c55e" stroke-width="3" stroke-dasharray="7 6"/>
+            <rect x="172" y="194" width="58" height="42" rx="8" fill="none" stroke="#22c55e" stroke-width="3"/>
+            <rect x="236" y="194" width="58" height="42" rx="8" fill="none" stroke="#22c55e" stroke-width="3"/>
+            <circle cx="260" cy="256" r="10" fill="none" stroke="#22c55e" stroke-width="3"/>
+            <path d="M242 276c6-10 30-10 36 0" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round"/>
+            <text x="182" y="292" class="ai2-s">应用 / 代理入口</text>
           </g>
 
-          <g filter="url(#aisa-shadow)">
-            <rect x="830" y="230" width="510" height="260" rx="14" fill="url(#aisa-card)" stroke="#1f2a44"/>
-            <text x="854" y="262" class="aisa-tag">POLICY &amp; CONTEXT</text>
-            <text x="854" y="292" class="aisa-h">策略护栏 + 上下文装配</text>
-            <text x="854" y="320" class="aisa-b">系统提示词版本化 · 引用块隔离</text>
-            <text x="854" y="344" class="aisa-b">敏感信息/注入检测 · 输出 schema 约束</text>
-            <text x="854" y="368" class="aisa-b">RAG 召回按权限过滤 · 上下文裁剪</text>
-            <text x="854" y="392" class="aisa-k">信任边界：数据 ≠ 指令</text>
-            <rect x="854" y="410" width="462" height="60" rx="12" fill="rgba(2,6,23,0.55)" stroke="rgba(51,65,85,0.7)"/>
-            <text x="878" y="438" class="aisa-b">输出前：拒绝高风险意图 / 输出后：编码与严格解析</text>
-            <text x="878" y="462" class="aisa-b">把模型输出当作不可信输入处理</text>
+          <g filter="url(#ai2-shadow)">
+            <rect x="62" y="86" width="120" height="36" rx="10" fill="#22c55e"/>
+            <text x="82" y="110" font-family="Inter,system-ui" font-size="12" font-weight="700" fill="#ffffff">传输的网络数据</text>
+            <rect x="62" y="128" width="120" height="36" rx="10" fill="#22c55e"/>
+            <text x="88" y="152" font-family="Inter,system-ui" font-size="12" font-weight="700" fill="#ffffff">无加密传输</text>
+            <rect x="62" y="316" width="120" height="36" rx="10" fill="#22c55e"/>
+            <text x="96" y="340" font-family="Inter,system-ui" font-size="12" font-weight="700" fill="#ffffff">网站攻击</text>
+            <rect x="62" y="358" width="120" height="36" rx="10" fill="#22c55e"/>
+            <text x="86" y="382" font-family="Inter,system-ui" font-size="12" font-weight="700" fill="#ffffff">敏感信息泄露</text>
           </g>
 
-          <g filter="url(#aisa-shadow)">
-            <rect x="520" y="520" width="360" height="150" rx="14" fill="url(#aisa-card)" stroke="#1f2a44"/>
-            <text x="544" y="552" class="aisa-tag">LLM RUNTIME</text>
-            <text x="544" y="582" class="aisa-h">模型推理与路由</text>
-            <text x="544" y="610" class="aisa-b">模型版本 · 参数 · 路由策略</text>
-            <text x="544" y="634" class="aisa-b">成本/延迟预算 · DoS 防护</text>
-            <text x="544" y="658" class="aisa-k">信任边界：推理器 ≠ 执行器</text>
+          <g filter="url(#ai2-shadow)">
+            <rect x="352" y="92" width="88" height="44" rx="10" fill="#22c55e"/>
+            <text x="372" y="120" font-family="Inter,system-ui" font-size="12" font-weight="700" fill="#ffffff">提示注入</text>
           </g>
 
-          <g filter="url(#aisa-shadow)">
-            <rect x="920" y="520" width="420" height="150" rx="14" fill="url(#aisa-card)" stroke="#1f2a44"/>
-            <text x="944" y="552" class="aisa-tag">TOOL BROKER</text>
-            <text x="944" y="582" class="aisa-h">工具代理 / 执行网关</text>
-            <text x="944" y="610" class="aisa-b">参数白名单 · 最小权限 · 关键动作审批</text>
-            <text x="944" y="634" class="aisa-b">沙箱执行 · 出站控制 · 结果最小化</text>
-            <text x="944" y="658" class="aisa-k">信任边界：模型 → 真实世界</text>
+          <g>
+            <path d="M310 220 L404 220" stroke="#111827" stroke-width="2" stroke-dasharray="3 4" marker-end="url(#ai2-arrow)"/>
+            <text x="326" y="206" class="ai2-s">Prompt</text>
           </g>
 
-          <g filter="url(#aisa-shadow)">
-            <rect x="920" y="690" width="200" height="140" rx="14" fill="url(#aisa-card)" stroke="#1f2a44"/>
-            <text x="944" y="722" class="aisa-tag">DATA</text>
-            <text x="944" y="752" class="aisa-h">知识库/向量库</text>
-            <text x="944" y="780" class="aisa-b">权限召回过滤</text>
-            <text x="944" y="804" class="aisa-b">投毒溯源/回滚</text>
-
-            <rect x="1140" y="690" width="200" height="140" rx="14" fill="url(#aisa-card)" stroke="#1f2a44"/>
-            <text x="1164" y="722" class="aisa-tag">ENTERPRISE</text>
-            <text x="1164" y="752" class="aisa-h">业务系统/API</text>
-            <text x="1164" y="780" class="aisa-b">数据最小化</text>
-            <text x="1164" y="804" class="aisa-b">密钥隔离/轮换</text>
+          <g filter="url(#ai2-shadow)">
+            <rect x="404" y="156" width="150" height="108" rx="14" fill="#fff" stroke="#22c55e" stroke-width="3" stroke-dasharray="7 6"/>
+            <path d="M468 176l18 10 18-10 0 22-18 10-18-10z" fill="none" stroke="#22c55e" stroke-width="3" stroke-linejoin="round"/>
+            <text x="452" y="254" class="ai2-s">检索器</text>
+            <text x="446" y="272" class="ai2-s">增强提示</text>
           </g>
 
-          <g filter="url(#aisa-shadow)">
-            <rect x="80" y="560" width="400" height="270" rx="14" fill="url(#aisa-card)" stroke="#1f2a44"/>
-            <text x="104" y="592" class="aisa-tag">OBSERVABILITY</text>
-            <text x="104" y="622" class="aisa-h">审计与检测（证据链）</text>
-            <text x="104" y="650" class="aisa-b">输入/引用/工具调用/输出/成本延迟</text>
-            <text x="104" y="674" class="aisa-b">泄露检测 · 越权检测 · 异常外发</text>
-            <text x="104" y="698" class="aisa-b">告警与自动降级（kill switch）</text>
-            <rect x="104" y="716" width="352" height="92" rx="12" fill="rgba(2,6,23,0.55)" stroke="rgba(51,65,85,0.7)"/>
-            <text x="126" y="746" class="aisa-tag">EVAL / RED TEAM / REGRESSION</text>
-            <text x="126" y="772" class="aisa-b">安全基线用例集 + CI/灰度门禁</text>
-            <text x="126" y="796" class="aisa-b">对比基线，阻断风险退化</text>
+          <g>
+            <path d="M554 210 L704 210" stroke="#111827" stroke-width="2" stroke-dasharray="3 4" marker-end="url(#ai2-arrow)"/>
+            <text x="598" y="196" class="ai2-s">语义搜索</text>
+            <text x="598" y="226" class="ai2-s">相关文件</text>
           </g>
 
-          <path d="M380 295 L420 295" stroke="#60a5fa" stroke-width="3" marker-end="url(#aisa-arrow)"/>
-          <path d="M380 455 L420 390" stroke="#60a5fa" stroke-width="3" marker-end="url(#aisa-arrow)"/>
-          <path d="M790 360 L820 360" stroke="#60a5fa" stroke-width="3" marker-end="url(#aisa-arrow)"/>
-          <path d="M610 470 L650 510" stroke="#60a5fa" stroke-width="3" marker-end="url(#aisa-arrow)"/>
-          <path d="M1090 490 L760 520" stroke="#60a5fa" stroke-width="3" marker-end="url(#aisa-arrow)"/>
-          <path d="M880 595 L910 595" stroke="#60a5fa" stroke-width="3" marker-end="url(#aisa-arrow)"/>
-          <path d="M1120 760 L1120 670" stroke="#60a5fa" stroke-width="3" marker-end="url(#aisa-arrow)"/>
-          <path d="M1240 760 L1240 670" stroke="#60a5fa" stroke-width="3" marker-end="url(#aisa-arrow)"/>
-          <path d="M700 670 L480 670" stroke="#60a5fa" stroke-width="3" marker-end="url(#aisa-arrow)"/>
-          <path d="M880 600 C760 640, 650 680, 480 690" stroke="rgba(96,165,250,0.45)" stroke-width="3" fill="none" marker-end="url(#aisa-arrow)"/>
+          <g filter="url(#ai2-shadow)">
+            <rect x="704" y="92" width="136" height="70" rx="14" fill="#fff" stroke="#22c55e" stroke-width="3" stroke-dasharray="7 6"/>
+            <path d="M746 118c0-8 12-14 26-14s26 6 26 14-12 14-26 14-26-6-26-14z" fill="none" stroke="#22c55e" stroke-width="3"/>
+            <path d="M746 118v24c0 8 12 14 26 14s26-6 26-14v-24" fill="none" stroke="#22c55e" stroke-width="3"/>
+            <text x="728" y="156" class="ai2-s">私有数据存储</text>
+          </g>
+
+          <g filter="url(#ai2-shadow)">
+            <rect x="704" y="178" width="136" height="84" rx="14" fill="#fff" stroke="#22c55e" stroke-width="3" stroke-dasharray="7 6"/>
+            <path d="M736 214l16-14 20 18 18-12 18 22" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="736" cy="214" r="4" fill="#22c55e"/>
+            <circle cx="752" cy="200" r="4" fill="#22c55e"/>
+            <circle cx="772" cy="218" r="4" fill="#22c55e"/>
+            <text x="742" y="254" class="ai2-s">向量数据库</text>
+          </g>
+
+          <g>
+            <path d="M772 262 L772 330" stroke="#111827" stroke-width="2" stroke-dasharray="3 4" marker-end="url(#ai2-arrow)"/>
+            <text x="784" y="304" class="ai2-s">采集管道</text>
+          </g>
+
+          <g filter="url(#ai2-shadow)">
+            <rect x="708" y="330" width="132" height="86" rx="14" fill="#fff" stroke="#22c55e" stroke-width="3" stroke-dasharray="7 6"/>
+            <path d="M734 386c0-8 12-14 26-14s26 6 26 14-12 14-26 14-26-6-26-14z" fill="none" stroke="#22c55e" stroke-width="3"/>
+            <path d="M734 386v18c0 8 12 14 26 14s26-6 26-14v-18" fill="none" stroke="#22c55e" stroke-width="3"/>
+            <text x="754" y="414" class="ai2-s">Data</text>
+          </g>
+
+          <g filter="url(#ai2-shadow)">
+            <rect x="848" y="288" width="144" height="60" rx="14" fill="#22c55e"/>
+            <text x="866" y="314" font-family="Inter,system-ui" font-size="12" font-weight="700" fill="#ffffff">网络爬虫采集</text>
+          </g>
+
+          <g>
+            <path d="M840 330 L848 316" stroke="#111827" stroke-width="2" stroke-dasharray="3 4"/>
+            <path d="M920 348 L908 416" stroke="#111827" stroke-width="2" stroke-dasharray="3 4"/>
+          </g>
+
+          <g filter="url(#ai2-shadow)">
+            <rect x="404" y="286" width="150" height="110" rx="14" fill="#fff" stroke="#22c55e" stroke-width="3" stroke-dasharray="7 6"/>
+            <circle cx="466" cy="324" r="18" fill="none" stroke="#22c55e" stroke-width="3"/>
+            <path d="M466 306v36M448 324h36" stroke="#22c55e" stroke-width="3" stroke-linecap="round"/>
+            <text x="444" y="384" class="ai2-s">生产</text>
+            <text x="442" y="402" class="ai2-s">模型</text>
+          </g>
+
+          <g filter="url(#ai2-shadow)">
+            <rect x="404" y="408" width="150" height="110" rx="14" fill="#fff" stroke="#22c55e" stroke-width="3" stroke-dasharray="7 6"/>
+            <circle cx="466" cy="446" r="18" fill="none" stroke="#22c55e" stroke-width="3"/>
+            <path d="M466 428v36M448 446h36" stroke="#22c55e" stroke-width="3" stroke-linecap="round"/>
+            <text x="444" y="506" class="ai2-s">训练</text>
+            <text x="442" y="524" class="ai2-s">模型</text>
+          </g>
+
+          <g>
+            <path d="M479 396 L479 408" stroke="#111827" stroke-width="2" stroke-dasharray="3 4" marker-end="url(#ai2-arrow)"/>
+          </g>
+
+          <g filter="url(#ai2-shadow)">
+            <rect x="588" y="420" width="164" height="98" rx="14" fill="#fff" stroke="#22c55e" stroke-width="3" stroke-dasharray="7 6"/>
+            <path d="M654 456l18 10 18-10 0 22-18 10-18-10z" fill="none" stroke="#22c55e" stroke-width="3" stroke-linejoin="round"/>
+            <text x="624" y="508" class="ai2-s">开源模型</text>
+          </g>
+
+          <g filter="url(#ai2-shadow)">
+            <rect x="602" y="386" width="92" height="30" rx="10" fill="#22c55e"/>
+            <text x="612" y="406" font-family="Inter,system-ui" font-size="11" font-weight="700" fill="#ffffff">供应链漏洞</text>
+            <rect x="702" y="386" width="92" height="30" rx="10" fill="#22c55e"/>
+            <text x="724" y="406" font-family="Inter,system-ui" font-size="11" font-weight="700" fill="#ffffff">模型后门</text>
+          </g>
+
+          <g filter="url(#ai2-shadow)">
+            <rect x="260" y="442" width="96" height="30" rx="10" fill="#22c55e"/>
+            <text x="272" y="462" font-family="Inter,system-ui" font-size="11" font-weight="700" fill="#ffffff">数据投毒</text>
+            <rect x="260" y="476" width="96" height="30" rx="10" fill="#22c55e"/>
+            <text x="272" y="496" font-family="Inter,system-ui" font-size="11" font-weight="700" fill="#ffffff">数据泄露</text>
+          </g>
+
+          <g>
+            <path d="M310 464 L404 462" stroke="#111827" stroke-width="2" stroke-dasharray="3 4" marker-end="url(#ai2-arrow)"/>
+            <path d="M554 342 L404 342" stroke="#111827" stroke-width="2" stroke-dasharray="3 4" marker-end="url(#ai2-arrow)"/>
+          </g>
+
+          <g filter="url(#ai2-shadow)">
+            <rect x="100" y="520" width="824" height="44" rx="12" fill="#ffffff" stroke="#111827" stroke-width="2"/>
+            <text x="408" y="548" font-family="Inter,system-ui" font-size="12" font-weight="700" fill="#111827">Operating Systems</text>
+            <text x="528" y="548" font-family="Inter,system-ui" font-size="12" font-weight="700" fill="#111827">Virtualization</text>
+            <text x="650" y="548" font-family="Inter,system-ui" font-size="12" font-weight="700" fill="#111827">Containerization</text>
+            <text x="792" y="548" font-family="Inter,system-ui" font-size="12" font-weight="700" fill="#111827">Networking</text>
+          </g>
+          <text x="430" y="568" font-family="Inter,system-ui" font-size="10" fill="#111827">Infrastructure  |  Data Center  |  AI Clouds</text>
+          <text x="844" y="568" font-family="Inter,system-ui" font-size="10" fill="#111827">BlueField-3 DPU</text>
         </svg>
-        <figcaption>把 AI 应用拆成：入口控制、上下文装配、模型推理、工具执行、数据访问、观测审计与回归评测</figcaption>
+        <figcaption>RAG/LLM/数据管道的典型链路与攻击面：提示注入、数据投毒、供应链漏洞、模型后门、敏感信息泄露</figcaption>
       </figure>
+
+      <h2>读图指南：按“攻击链”落控制点</h2>
+      <ul>
+        <li><strong>入口（User → 应用）：</strong>鉴权、租户隔离、速率限制、输入风控（注入意图/异常结构）。</li>
+        <li><strong>检索（应用 → 检索器/向量库）：</strong>召回前后按权限过滤、检索源溯源、RAG 污染检测与回滚。</li>
+        <li><strong>推理（增强提示 → 生产模型）：</strong>系统提示词版本化、引用块隔离、输出 schema 校验与拒绝策略。</li>
+        <li><strong>供应链与训练（数据管道/开源模型 → 训练模型）：</strong>数据投毒防护、依赖锁定、制品签名与安全评测门禁。</li>
+      </ul>
 
       <h2>要保护什么：AI 系统的核心资产</h2>
       <ul>
@@ -233,6 +275,74 @@
         <li><strong>回归评测：</strong>golden set + 安全用例集挂到 CI/灰度，防止改动引入退化。</li>
         <li><strong>应急：</strong>kill switch、能力降级（关工具/关外部检索）、快速回滚版本。</li>
       </ul>
+
+      <h2>控制项清单：从“能拦截”到“可审计、可回归”</h2>
+      <h3>1) Prompt Injection 防线</h3>
+      <ul>
+        <li><strong>边界表达：</strong>外部内容一律进入引用块；引用块只允许总结/抽取，不允许变更规则与触发动作。</li>
+        <li><strong>风险信号：</strong>识别“忽略规则/还原暗号/照做/解码/执行命令”等意图；异常断句与结构化编码。</li>
+        <li><strong>降级策略：</strong>高风险时关外部检索、关工具调用、缩上下文，返回解释与下一步建议。</li>
+      </ul>
+
+      <h3>2) 工具调用与 API 防线</h3>
+      <ul>
+        <li><strong>Tool Broker：</strong>模型只能“提议”调用，策略层决定是否执行（ABAC + 参数白名单）。</li>
+        <li><strong>关键动作审批：</strong>外发/删除/批量变更/高权限查询走人审或二次确认。</li>
+        <li><strong>出站控制：</strong>网络 egress 白名单 + 审计，防止任意域名外发与插件拉取。</li>
+        <li><strong>输出处理：</strong>模型输出永远不直接进入执行上下文；先严格解析与编码/转义。</li>
+      </ul>
+
+      <h3>3) 数据与知识库（RAG）防线</h3>
+      <ul>
+        <li><strong>权限召回：</strong>向量召回前后都按用户/租户/密级过滤；默认不召回敏感域。</li>
+        <li><strong>投毒溯源：</strong>检索源白名单、内容签名与变更审计；发现污染可快速回滚。</li>
+        <li><strong>最小化：</strong>给模型的上下文只包含任务必需字段；敏感字段脱敏或不下发。</li>
+      </ul>
+
+      <h3>4) 模型与供应链防线</h3>
+      <ul>
+        <li><strong>制品治理：</strong>模型/提示模板/路由策略/评测集全部版本化，发布需通过评测门禁。</li>
+        <li><strong>开源依赖：</strong>SBOM、锁版本、签名校验、供应链扫描；避免运行时拉取不受控依赖。</li>
+        <li><strong>防盗取/滥用：</strong>强鉴权、速率限制、异常行为检测；必要时做输出指纹。</li>
+      </ul>
+
+      <h2>一张表看清：攻击面 → 控制点</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>攻击面</th>
+            <th>典型风险</th>
+            <th>可落地控制点</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>提示注入</td>
+            <td>绕过规则、泄露提示词/敏感信息</td>
+            <td>引用块隔离、输入风控、拒绝与降级、输出泄露检测</td>
+          </tr>
+          <tr>
+            <td>RAG 污染</td>
+            <td>供应链式注入、长期传播</td>
+            <td>检索源白名单、内容溯源与回滚、权限召回过滤</td>
+          </tr>
+          <tr>
+            <td>工具/插件</td>
+            <td>越权查询、外发、破坏性操作</td>
+            <td>Tool Broker、参数白名单、关键动作审批、沙箱与 egress 控制</td>
+          </tr>
+          <tr>
+            <td>不安全输出处理</td>
+            <td>XSS/注入/模板注入等二次漏洞</td>
+            <td>严格解析、编码/转义、禁止把模型输出直接拼接到执行上下文</td>
+          </tr>
+          <tr>
+            <td>成本/DoS</td>
+            <td>token/延迟爆炸、账单攻击</td>
+            <td>配额与限流、上下文上限、复杂度中止、缓存与分级路由</td>
+          </tr>
+        </tbody>
+      </table>
 
       <h2>最小可行落地（MVP）清单（按优先级）</h2>
       <ul>
