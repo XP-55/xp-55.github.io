@@ -34,7 +34,86 @@
       <h2>一句话定义：AI Harness 是什么</h2>
       <p>在 AI/LLM 语境里，harness 指一套用于<strong>可复现运行</strong> LLM/RAG/Agent 场景，并对输出/行为做<strong>可度量判定</strong>的外部体系。它通常包含：驱动执行、环境夹具、评判器（oracle/judge）、证据采集与回放能力。</p>
       <figure>
-        <img src="harness-engineering-assets/ai-harness-pipeline.svg" alt="AI Harness pipeline：case spec、runner、judge、artifacts、diff/report" />
+        <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-label="AI Harness pipeline diagram">
+          <defs>
+            <linearGradient id="hep-bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#0b1220"/>
+              <stop offset="1" stop-color="#0e1730"/>
+            </linearGradient>
+            <linearGradient id="hep-card" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#111827" stop-opacity="0.7"/>
+              <stop offset="1" stop-color="#0f172a" stop-opacity="0.45"/>
+            </linearGradient>
+            <filter id="hep-shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity="0.35"/>
+            </filter>
+            <marker id="hep-arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+              <path d="M0,0 L10,5 L0,10 Z" fill="#60a5fa"/>
+            </marker>
+            <style>
+              .hep-t { font: 600 20px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #f8fafc; }
+              .hep-s { font: 400 14px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #cbd5e1; }
+              .hep-k { font: 600 12px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #bfdbfe; letter-spacing: .12em; }
+            </style>
+          </defs>
+
+          <rect x="0" y="0" width="1200" height="420" rx="18" fill="url(#hep-bg)"/>
+          <rect x="22" y="22" width="1156" height="376" rx="16" fill="none" stroke="#1f2a44"/>
+          <text x="46" y="72" class="hep-t">AI Harness Pipeline（评测/红队/回归通用）</text>
+          <text x="46" y="102" class="hep-s">把场景定义、执行、判定与证据链串起来，让结果可复现、可度量、可审计</text>
+
+          <g filter="url(#hep-shadow)">
+            <g>
+              <rect x="60" y="140" width="200" height="170" rx="14" fill="url(#hep-card)" stroke="#1f2a44"/>
+              <text x="80" y="176" class="hep-k">CASE SPEC</text>
+              <text x="80" y="210" class="hep-t" font-size="18">用例定义</text>
+              <text x="80" y="238" class="hep-s">输入 / 上下文</text>
+              <text x="80" y="262" class="hep-s">允许工具 / 约束</text>
+              <text x="80" y="286" class="hep-s">期望 / 评分维度</text>
+            </g>
+
+            <g>
+              <rect x="300" y="140" width="200" height="170" rx="14" fill="url(#hep-card)" stroke="#1f2a44"/>
+              <text x="320" y="176" class="hep-k">RUNNER</text>
+              <text x="320" y="210" class="hep-t" font-size="18">执行器</text>
+              <text x="320" y="238" class="hep-s">模型与参数</text>
+              <text x="320" y="262" class="hep-s">提示词 / 路由</text>
+              <text x="320" y="286" class="hep-s">RAG / Agent 规划</text>
+            </g>
+
+            <g>
+              <rect x="540" y="140" width="200" height="170" rx="14" fill="url(#hep-card)" stroke="#1f2a44"/>
+              <text x="560" y="176" class="hep-k">JUDGE</text>
+              <text x="560" y="210" class="hep-t" font-size="18">评判器</text>
+              <text x="560" y="238" class="hep-s">规则判定优先</text>
+              <text x="560" y="262" class="hep-s">模型判定辅助</text>
+              <text x="560" y="286" class="hep-s">阈值与抽检</text>
+            </g>
+
+            <g>
+              <rect x="780" y="140" width="200" height="170" rx="14" fill="url(#hep-card)" stroke="#1f2a44"/>
+              <text x="800" y="176" class="hep-k">ARTIFACTS</text>
+              <text x="800" y="210" class="hep-t" font-size="18">证据采集</text>
+              <text x="800" y="238" class="hep-s">引用 / 工具调用</text>
+              <text x="800" y="262" class="hep-s">日志 / Trace</text>
+              <text x="800" y="286" class="hep-s">成本 / 延迟</text>
+            </g>
+
+            <g>
+              <rect x="1020" y="140" width="120" height="170" rx="14" fill="url(#hep-card)" stroke="#1f2a44"/>
+              <text x="1038" y="176" class="hep-k">DIFF</text>
+              <text x="1038" y="210" class="hep-t" font-size="18">对比</text>
+              <text x="1038" y="238" class="hep-s">基线</text>
+              <text x="1038" y="262" class="hep-s">变化点</text>
+              <text x="1038" y="286" class="hep-s">报告</text>
+            </g>
+          </g>
+
+          <path d="M260 225 L296 225" stroke="#60a5fa" stroke-width="3" marker-end="url(#hep-arrow)"/>
+          <path d="M500 225 L536 225" stroke="#60a5fa" stroke-width="3" marker-end="url(#hep-arrow)"/>
+          <path d="M740 225 L776 225" stroke="#60a5fa" stroke-width="3" marker-end="url(#hep-arrow)"/>
+          <path d="M980 225 L1016 225" stroke="#60a5fa" stroke-width="3" marker-end="url(#hep-arrow)"/>
+        </svg>
         <figcaption>AI Harness 的通用流水线：用例定义 → 执行 → 判定 → 证据 → 对比报告</figcaption>
       </figure>
 
@@ -56,7 +135,61 @@
       <h3>3) Regression Harness（回归）</h3>
       <p>用于回答“改动有没有把以前好的东西弄坏”。它依赖一组稳定的 golden set（黄金用例）与明确阈值，通常挂在 CI 上做 smoke/PR gating。</p>
       <figure>
-        <img src="harness-engineering-assets/ai-harness-types.svg" alt="AI Harness types：evaluation、red team、regression" />
+        <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-label="AI Harness types diagram">
+          <defs>
+            <linearGradient id="het-bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#0b1220"/>
+              <stop offset="1" stop-color="#0e1730"/>
+            </linearGradient>
+            <linearGradient id="het-card" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#111827" stop-opacity="0.7"/>
+              <stop offset="1" stop-color="#0f172a" stop-opacity="0.45"/>
+            </linearGradient>
+            <filter id="het-shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity="0.35"/>
+            </filter>
+            <style>
+              .het-t { font: 600 22px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #f8fafc; }
+              .het-h { font: 700 18px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #f8fafc; }
+              .het-s { font: 400 14px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #cbd5e1; }
+              .het-tag { font: 600 12px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #bfdbfe; letter-spacing: .12em; }
+            </style>
+          </defs>
+
+          <rect x="0" y="0" width="1200" height="420" rx="18" fill="url(#het-bg)"/>
+          <rect x="22" y="22" width="1156" height="376" rx="16" fill="none" stroke="#1f2a44"/>
+          <text x="46" y="72" class="het-t">AI Harness 的三类形态</text>
+          <text x="46" y="102" class="het-s">同一套工程骨架，不同的目标函数与用例集合</text>
+
+          <g filter="url(#het-shadow)">
+            <g>
+              <rect x="60" y="140" width="350" height="220" rx="14" fill="url(#het-card)" stroke="#1f2a44"/>
+              <text x="86" y="176" class="het-tag">EVALUATION</text>
+              <text x="86" y="210" class="het-h">评测 Harness</text>
+              <text x="86" y="242" class="het-s">目标：改动是否变“更好”</text>
+              <text x="86" y="270" class="het-s">指标：准确性 / 引用一致 / 结构合规</text>
+              <text x="86" y="298" class="het-s">关注：成本 / 延迟 / 稳定性</text>
+            </g>
+
+            <g>
+              <rect x="425" y="140" width="350" height="220" rx="14" fill="url(#het-card)" stroke="#1f2a44"/>
+              <text x="451" y="176" class="het-tag">RED TEAM</text>
+              <text x="451" y="210" class="het-h">红队 Harness</text>
+              <text x="451" y="242" class="het-s">目标：改动是否变“更安全”</text>
+              <text x="451" y="270" class="het-s">覆盖：提示注入 / 外泄 / 越权工具调用</text>
+              <text x="451" y="298" class="het-s">关注：证据链与审计可复盘</text>
+            </g>
+
+            <g>
+              <rect x="790" y="140" width="350" height="220" rx="14" fill="url(#het-card)" stroke="#1f2a44"/>
+              <text x="816" y="176" class="het-tag">REGRESSION</text>
+              <text x="816" y="210" class="het-h">回归 Harness</text>
+              <text x="816" y="242" class="het-s">目标：不要把旧的好结果弄坏</text>
+              <text x="816" y="270" class="het-s">用例：golden set / 高风险集 / 烟测</text>
+              <text x="816" y="298" class="het-s">集成：CI 门禁 / 灰度 / 版本对比</text>
+            </g>
+          </g>
+        </svg>
         <figcaption>同一套工程骨架，三种目标：更好 / 更安全 / 不退化</figcaption>
       </figure>
 
@@ -73,7 +206,67 @@
       <h3>1) 非确定性（Non-determinism）</h3>
       <p>同一个输入可能得到不同输出。解决思路不是追求“字面一致”，而是把判定从字符串匹配升级为：结构化输出校验、关键事实抽取、引用一致性、统计阈值与置信区间。</p>
       <figure>
-        <img src="harness-engineering-assets/ai-system-layers.svg" alt="LLM 应用分层与控制点：input、context、model、tools & data" />
+        <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-label="AI system layers and controls diagram">
+          <defs>
+            <linearGradient id="hes-bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#0b1220"/>
+              <stop offset="1" stop-color="#0e1730"/>
+            </linearGradient>
+            <linearGradient id="hes-lane" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#111827" stop-opacity="0.65"/>
+              <stop offset="1" stop-color="#0f172a" stop-opacity="0.4"/>
+            </linearGradient>
+            <filter id="hes-shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity="0.35"/>
+            </filter>
+            <style>
+              .hes-t { font: 600 22px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #f8fafc; }
+              .hes-s { font: 400 14px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #cbd5e1; }
+              .hes-h { font: 700 16px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #f8fafc; }
+              .hes-b { font: 400 13px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #cbd5e1; }
+              .hes-tag { font: 600 12px Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #bfdbfe; letter-spacing: .12em; }
+            </style>
+          </defs>
+
+          <rect x="0" y="0" width="1200" height="520" rx="18" fill="url(#hes-bg)"/>
+          <rect x="22" y="22" width="1156" height="476" rx="16" fill="none" stroke="#1f2a44"/>
+          <text x="46" y="72" class="hes-t">LLM 应用的分层：Harness 应该验证哪些东西</text>
+          <text x="46" y="102" class="hes-s">从输入到工具与数据层，分别定义“可执行的边界”和“可审计的证据”</text>
+
+          <g filter="url(#hes-shadow)">
+            <g>
+              <rect x="60" y="140" width="1080" height="78" rx="14" fill="url(#hes-lane)" stroke="#1f2a44"/>
+              <text x="86" y="170" class="hes-tag">INPUT</text>
+              <text x="86" y="198" class="hes-b">用户输入 / 文件上传 / 网页内容 / 工单与邮件</text>
+              <text x="760" y="170" class="hes-h">控制点</text>
+              <text x="760" y="198" class="hes-b">风险评分 · 结构化解析 · 引用块隔离</text>
+            </g>
+
+            <g>
+              <rect x="60" y="234" width="1080" height="78" rx="14" fill="url(#hes-lane)" stroke="#1f2a44"/>
+              <text x="86" y="264" class="hes-tag">CONTEXT</text>
+              <text x="86" y="292" class="hes-b">系统提示词 / 路由 / RAG 拼接 / 会话状态</text>
+              <text x="760" y="264" class="hes-h">控制点</text>
+              <text x="760" y="292" class="hes-b">版本化 · 上下文裁剪 · 权限标签</text>
+            </g>
+
+            <g>
+              <rect x="60" y="328" width="1080" height="78" rx="14" fill="url(#hes-lane)" stroke="#1f2a44"/>
+              <text x="86" y="358" class="hes-tag">MODEL</text>
+              <text x="86" y="386" class="hes-b">推理与生成（非确定性）</text>
+              <text x="760" y="358" class="hes-h">控制点</text>
+              <text x="760" y="386" class="hes-b">判定规则 · 评分阈值 · 幻觉与泄露检测</text>
+            </g>
+
+            <g>
+              <rect x="60" y="422" width="1080" height="78" rx="14" fill="url(#hes-lane)" stroke="#1f2a44"/>
+              <text x="86" y="452" class="hes-tag">TOOLS &amp; DATA</text>
+              <text x="86" y="480" class="hes-b">数据库/API/外发/工单系统 · 向量库/日志/缓存</text>
+              <text x="760" y="452" class="hes-h">控制点</text>
+              <text x="760" y="480" class="hes-b">最小权限 · 参数白名单 · 审计回放 · 沙箱</text>
+            </g>
+          </g>
+        </svg>
         <figcaption>分层定义控制点：输入/上下文/模型/工具与数据层分别设置边界与审计</figcaption>
       </figure>
 
